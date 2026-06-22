@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vote</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      background: #111;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      gap: 1.25rem;
+    }
+    h1 { font-size: 1.6rem; line-height: 1.25; margin: 0.5rem 0 0; }
+    .options { display: flex; flex-direction: column; gap: 1rem; }
+    button.opt {
+      font-size: 1.3rem;
+      padding: 1.25rem;
+      border: 2px solid #444;
+      border-radius: 14px;
+      background: #1c1c1f;
+      color: #eee;
+      cursor: pointer;
+      transition: transform .05s ease, background .15s ease;
+    }
+    button.opt:active { transform: scale(.98); }
+    button.opt:disabled { opacity: .5; }
+    button.opt.chosen { background: #1b5e20; border-color: #2e7d32; }
+    .status { font-size: 1.1rem; text-align: center; min-height: 1.5em; color: #9ad; }
+    .msg { text-align: center; color: #888; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <h1 id="question">Loading…</h1>
+  <div class="options" id="options"></div>
+  <div class="status" id="status"></div>
+
+  <script type="module">
+    import { ref, onValue, update, increment } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    import { db, getParams } from "./firebase-config.js";
+    import { POLLS } from "./polls.js";
+
+    const { room } = getParams();
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const statusEl = document.getElementById("status");
+
+    let currentPoll = null;
+
+    // Follow the presenter: whichever poll is live is what we render.
+    onValue(ref(db, `rooms/${room}/currentPoll`), (snap) => {
+      const poll = snap.val();
+      if (poll === currentPoll) return;
+      currentPoll = poll;
+      render();
+    }, (err) => {
+      questionEl.textContent = "DB error: " + err.message;
+      console.error(err);
+    });
+
+    function render() {
+      statusEl.textContent = "";
+      if (!currentPoll || !POLLS[currentPoll]) {
+        questionEl.textContent = "Waiting for the next question…";
+        optionsEl.innerHTML = "";
+        return;
+      }
+      const { question, options } = POLLS[currentPoll];
+      questionEl.textContent = question;
+      const alreadyVoted = localStorage.getItem(votedKey(currentPoll));
+
+      optionsEl.innerHTML = "";
+      for (const opt of options) {
+        const btn = document.createElement("button");
+        btn.className = "opt";
+        btn.textContent = opt.label;
+        if (alreadyVoted === opt.id) btn.classList.add("chosen");
+        if (alreadyVoted) btn.disabled = true;
+        btn.addEventListener("click", () => castVote(opt));
+        optionsEl.appendChild(btn);
+      }
+      if (alreadyVoted) statusEl.textContent = "✓ Your vote is in";
+    }
+
+    async function castVote(opt) {
+      const poll = currentPoll;
+      // disable all buttons immediately for instant feedback
+      [...optionsEl.children].forEach((b) => (b.disabled = true));
+      try {
+        await update(ref(db, `rooms/${room}/votes/${poll}`), {
+          [opt.id]: increment(1),
+        });
+        localStorage.setItem(votedKey(poll), opt.id);
+        if (poll === currentPoll) render();
+      } catch (e) {
+        statusEl.textContent = "Couldn't record vote — tap again";
+        [...optionsEl.children].forEach((b) => (b.disabled = false));
+        console.error(e);
+      }
+    }
+
+    function votedKey(poll) {
+      return `voted:${room}:${poll}`;
+    }
+  </script>
+</body>
+</html>

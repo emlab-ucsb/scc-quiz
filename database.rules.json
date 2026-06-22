@@ -1,0 +1,14 @@
+{
+  "rules": {
+    // Everything is denied by default...
+    ".read": false,
+    ".write": false,
+    // ...except poll data under /rooms, which the audience & presenter
+    // need to read and write. Scoped this way, nothing else in the DB is
+    // exposed. Good enough for a friendly talk; not bank-grade security.
+    "rooms": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
