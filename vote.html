@@ -83,7 +83,7 @@
     let currentPoll = undefined;
     let player = getPlayer();
 
-    if (player) startSession();
+    if (player) { gate.style.display = "none"; startSession(); }
     else showGate();
 
     function getPlayer() {
