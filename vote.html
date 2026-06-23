@@ -53,7 +53,9 @@
   <script type="module">
     import { ref, onValue, set, push, onDisconnect } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
     import { db, getParams } from "./firebase-config.js";
-    import { POLLS } from "./polls.js";
+    // Load the question bank fresh on every visit (the ?v= busts the browser
+    // cache) so edits to polls.js show up on a normal reload — no hard refresh.
+    const { POLLS } = await import(`./polls.js?v=${Date.now()}`);
 
     const { room } = getParams();
     const gate = document.getElementById("gate");

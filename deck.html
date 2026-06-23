@@ -122,7 +122,9 @@
   <script type="module">
     import { ref, onValue, set, get } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
     import { db } from "./firebase-config.js";
-    import { POLLS, POLL_ORDER, scoreAnswer } from "./polls.js";
+    // Load the question bank fresh on every visit (the ?v= busts the browser
+    // cache) so edits to polls.js show up on a normal reload — no hard refresh.
+    const { POLLS, POLL_ORDER, scoreAnswer } = await import(`./polls.js?v=${Date.now()}`);
 
     // Room comes from the URL (?room=foo) so each test can use a fresh room;
     // defaults to TTT for the real event. The QR below points phones at it.
