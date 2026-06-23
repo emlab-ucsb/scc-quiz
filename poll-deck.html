@@ -1,0 +1,17 @@
+<!-- Injected at end of the reveal deck body (include-after-body). -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+  .join-box { display: flex; gap: 2rem; align-items: center; justify-content: center; }
+  .join-box .qr { background: #fff; padding: 12px; border-radius: 12px; }
+  .join-meta { text-align: left; }
+  .join-count { font-size: 1.8rem; font-weight: 700; color: #43a047; margin-bottom: .75rem; }
+  .join-url { font-size: 1rem; color: #9ad; word-break: break-all; }
+
+  .poll-chart { display: flex; flex-direction: column; gap: .9rem; margin-top: 1.5rem; }
+  .poll-chart .bar-row { display: flex; flex-direction: column; gap: .3rem; }
+  .poll-chart .bar-top { display: flex; justify-content: space-between; font-size: 1.2rem; }
+  .poll-chart .bar-track { background: rgba(255,255,255,.12); border-radius: 8px; height: 32px; overflow: hidden; }
+  .poll-chart .bar-fill { height: 100%; width: 0; border-radius: 8px;
+    background: linear-gradient(90deg, #2e7d32, #43a047); transition: width .4s ease; }
+</style>
+<script type="module" src="poll-deck.js"></script>

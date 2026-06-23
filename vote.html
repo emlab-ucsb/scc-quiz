@@ -43,7 +43,7 @@
   <div class="status" id="status"></div>
 
   <script type="module">
-    import { ref, onValue, update, increment } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    import { ref, onValue, update, increment, push, set, onDisconnect } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
     import { db, getParams } from "./firebase-config.js";
     import { POLLS } from "./polls.js";
 
@@ -52,7 +52,17 @@
     const optionsEl = document.getElementById("options");
     const statusEl = document.getElementById("status");
 
-    let currentPoll = null;
+    // undefined (not null) so the first "waiting" update still renders.
+    let currentPoll = undefined;
+
+    // Presence: count this device while it's connected, auto-remove on disconnect.
+    const presenceList = ref(db, `rooms/${room}/presence`);
+    onValue(ref(db, ".info/connected"), (snap) => {
+      if (snap.val() !== true) return;
+      const mine = push(presenceList);
+      onDisconnect(mine).remove();
+      set(mine, true);
+    });
 
     // Follow the presenter: whichever poll is live is what we render.
     onValue(ref(db, `rooms/${room}/currentPoll`), (snap) => {

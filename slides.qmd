@@ -1,0 +1,139 @@
+---
+title: "The Social Cost of Carbon"
+subtitle: "A playful poll through a serious number · TTT"
+format:
+  revealjs:
+    theme: dark
+    slide-number: true
+    transition: fade
+    include-after-body: poll-deck.html
+---
+
+## Join in {data-room-join="true"}
+
+Scan to vote from your phone — answers follow the slides.
+
+::: {.join-box}
+<!-- QR + live "phones connected" count render here -->
+:::
+
+::: {.notes}
+Wait here until the join count climbs. Encourage people to scan now; they can
+stay on the page the whole time — questions appear automatically as we go.
+:::
+
+## Why put a price on carbon?
+
+Climate policy is a **cost–benefit problem**:
+
+- Cutting emissions costs something **today**.
+- It avoids damages **tomorrow** — heat, floods, lost crops, lives.
+
+To weigh them we need one number: the **price of a tonne of CO₂**.
+
+::: {.notes}
+This number quietly underlies trillions in regulatory decisions. Today we poke at
+how shaky — and how high — it might really be.
+:::
+
+## The Social Cost of Carbon
+
+> The present value of the damages from emitting one extra tonne of CO₂.
+
+It's the workhorse behind federal cost–benefit analysis. A higher SCC justifies
+more aggressive climate policy.
+
+::: {.notes}
+Keep it short — the first poll does the work of getting them invested before the reveal.
+:::
+
+## Your gut: what's a tonne of CO₂ worth? {data-poll="q1"}
+
+- Under \$25
+- Around \$50
+- Around \$185
+- Over \$300
+
+::: {.poll-chart}
+:::
+
+::: {.notes}
+No reveal yet — let them commit to a guess. Most will lowball it. Hold the tension
+before the next slide.
+:::
+
+## Rennert et al. (2022): a higher number
+
+In *Nature* — "Comprehensive evidence implies a higher social cost of CO₂":
+
+- Central estimate: **\$185 per tonne** (2% discount rate).
+- **3.6×** the \$51 the U.S. government was using.
+- Range roughly **\$44 – \$413** (5th–95th percentile).
+
+Built by updating four things at once: socioeconomics, climate, damages, discounting.
+
+::: {.notes}
+This is the "serious" anchor. Ask: did the room under- or over-shoot? Why might the
+true number be even messier than a single point estimate? → segue to Weitzman.
+:::
+
+## Weitzman's Dismal Theorem {data-poll="q2"}
+
+With fat-tailed catastrophic risk, the "correct" carbon price could be…
+
+- A modest, finite number
+- Effectively unbounded
+- Zero — too uncertain to act
+- Whatever the discount rate implies
+
+::: {.poll-chart}
+:::
+
+::: {.notes}
+This is the provocation. Let the split show before explaining.
+:::
+
+## Fat tails break the tidy number
+
+Weitzman (2009): if catastrophe sits in a **fat tail** and marginal utility blows up
+as consumption collapses, expected damages can be **unbounded** — standard
+cost–benefit "breaks down."
+
+- A single \$185 hides enormous tail risk.
+- The argument: **structural uncertainty** can matter more than the discount rate.
+
+::: {.notes}
+Good place to invite disagreement — economists push back hard on the Dismal Theorem.
+Is an unbounded price useful for actual policy? Let it breathe.
+:::
+
+## What will we *actually* hit? {data-poll="q3"}
+
+Peak warming vs. pre-industrial — your honest bet:
+
+- 1.5 °C or less
+- Around 2 °C
+- Around 3 °C
+- 4 °C or more
+
+::: {.poll-chart}
+:::
+
+::: {.notes}
+Personal + a little uncomfortable. Contrast the room's pessimism (or optimism) with
+the SCC numbers we just saw. Pivot to discussion.
+:::
+
+## From a number to a conversation
+
+- The SCC is the **bridge** from climate science to policy.
+- Rennert et al.: a defensible **\$185** — up from \$51.
+- Weitzman: maybe no single number can hold the **tail risk**.
+- What we *expect* to hit shapes what we're willing to pay now.
+
+*Source: Rennert et al., Nature 610, 687–692 (2022); Weitzman, REStat 91 (2009).*
+
+::: {.notes}
+Open floor: does a higher SCC change anyone's mind? Where should the number live —
+point estimate, range, or something that takes tail risk seriously?
+:::
