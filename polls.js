@@ -21,12 +21,12 @@ export const POLLS = {
     question:
       "When a pistol shrimp snaps its claw shut, the collapsing cavitation bubble briefly flashes light and reaches a peak temperature roughly comparable to what?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
-    correct: "c",
+    correct: "d",
     options: [
       { id: "a", label: "Boiling water", note: "~100 °C" },
       { id: "b", label: "A campfire", note: "~1,000 °C" },
-      { id: "c", label: "The surface of the sun", note: "~4,800 °C" },
-      { id: "d", label: "A lightning bolt", note: "~30,000 °C" },
+      { id: "c", label: "A lightning bolt", note: "~30,000 °C" },
+      { id: "d", label: "The surface of the sun", note: "~4,800 °C" },
     ],
   },
   q2: {
@@ -45,12 +45,12 @@ export const POLLS = {
     question:
       "A mantis shrimp throws the fastest punch in the animal kingdom — its club accelerates underwater about as fast as what?",
     background: "pics/mantis-shrimp.jpg.webp",
-    correct: "c",
+    correct: "d",
     options: [
-      { id: "a", label: "A thrown baseball", note: "~45 m/s²" },
-      { id: "b", label: "A sprinting cheetah", note: "~13,000 m/s²" },
-      { id: "c", label: "A .22-caliber bullet", note: "~100,000 m/s²" },
-      { id: "d", label: "A space shuttle launch", note: "~30 m/s²" },
+      { id: "a", label: "A space shuttle launch", note: "~30 m/s²" },
+      { id: "b", label: "A thrown baseball", note: "~45 m/s²" },
+      { id: "c", label: "A sprinting cheetah", note: "~13,000 m/s²" },
+      { id: "d", label: "A .22-caliber bullet", note: "~100,000 m/s²" },
     ],
   },
   q4: {
@@ -61,7 +61,7 @@ export const POLLS = {
     options: [
       { id: "a", label: "A house cat", note: "~5 kg" },
       { id: "b", label: "A golden retriever", note: "~30 kg" },
-      { id: "c", label: "A full-grown lion", note: "~190 kg" },
+      { id: "c", label: "A lion", note: "~190 kg" },
       { id: "d", label: "A grand piano", note: "~450 kg" },
     ],
   },
@@ -69,18 +69,18 @@ export const POLLS = {
     question:
       "Chasing giant squid in the dark, a sperm whale can hold its breath and dive to depths of roughly how much?",
     background: "pics/640x427-sperm-whale.png",
-    correct: "c",
+    correct: "b",
     options: [
-      { id: "a", label: "100 meters" },
-      { id: "b", label: "600 meters" },
-      { id: "c", label: "2,000 meters" },
-      { id: "d", label: "7,000 meters" },
+      { id: "a", label: "1,000 meters" },
+      { id: "b", label: "2,000 meters" },
+      { id: "c", label: "3,000 meters" },
+      { id: "d", label: "4,000 meters" },
     ],
   },
   q6: {
     question:
       "Which of the following businesses did NOT originate in Santa Barbara?",
-    background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
+    background: "pics/aerial-view-ocean-front.jpg",
     correct: "a",
     options: [
       { id: "a", label: "Patagonia", note: "Ventura, 1973" },
@@ -92,7 +92,7 @@ export const POLLS = {
   q7: {
     question:
       "Which three-time world champion surfer — celebrated for his silky-smooth style — grew up surfing in Santa Barbara?",
-    background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
+    background: "pics/aerial-view-ocean-front.jpg",
     correct: "b",
     options: [
       { id: "a", label: "Kelly Slater", note: "11× champ, Florida" },
@@ -104,7 +104,7 @@ export const POLLS = {
   q8: {
     question:
       "Founded in 1786, Old Mission Santa Barbara is known by what nickname?",
-    background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
+    background: "pics/aerial-view-ocean-front.jpg",
     correct: "c",
     options: [
       { id: "a", label: "Castle by the Sea" },
@@ -116,7 +116,7 @@ export const POLLS = {
   q9: {
     question:
       "Surfers cross oceans for a cobblestone right-hand point break on the Santa Barbara–Ventura county line, nicknamed the 'Queen of the Coast.' What is it?",
-    background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
+    background: "pics/aerial-view-ocean-front.jpg",
     correct: "a",
     options: [
       { id: "a", label: "Rincon", note: "SB–Ventura line" },
@@ -128,7 +128,7 @@ export const POLLS = {
   q10: {
     question:
       "During his presidency, Ronald Reagan's mountaintop ranch above Santa Barbara was dubbed the 'Western White House.' What was it named?",
-    background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
+    background: "pics/aerial-view-ocean-front.jpg",
     correct: "b",
     options: [
       { id: "a", label: "Rancho Mirage" },
