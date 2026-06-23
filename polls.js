@@ -79,26 +79,26 @@ export const POLLS = {
   },
   q6: {
     question:
-      "What now-ubiquitous business was founded in a tiny Isla Vista storefront in 1970, named after its founder's curly red hair?",
+      "Which of the following businesses did NOT originate in Santa Barbara?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
-    correct: "c",
+    correct: "a",
     options: [
       { id: "a", label: "Patagonia", note: "Ventura, 1973" },
       { id: "b", label: "Motel 6", note: "Santa Barbara, 1962" },
       { id: "c", label: "Kinko's", note: "Isla Vista, 1970" },
-      { id: "d", label: "The Habit Burger Grill", note: "Santa Barbara, 1969" },
+      { id: "d", label: "The Habit Burger Grill", note: "Goleta, 1969" },
     ],
   },
   q7: {
     question:
-      "UCSB is the only NCAA Division I school nicknamed the Gauchos — reportedly inspired by a 1927 silent film starring which swashbuckling actor?",
+      "Which three-time world champion surfer — celebrated for his silky-smooth style — grew up surfing in Santa Barbara?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
     correct: "b",
     options: [
-      { id: "a", label: "Rudolph Valentino" },
-      { id: "b", label: "Douglas Fairbanks" },
-      { id: "c", label: "Errol Flynn" },
-      { id: "d", label: "Charlie Chaplin" },
+      { id: "a", label: "Kelly Slater", note: "11× champ, Florida" },
+      { id: "b", label: "Tom Curren", note: "Santa Barbara" },
+      { id: "c", label: "Laird Hamilton", note: "big-wave, Hawaii" },
+      { id: "d", label: "Shaun Tomson", note: "1977 champ, South Africa" },
     ],
   },
   q8: {
@@ -115,14 +115,14 @@ export const POLLS = {
   },
   q9: {
     question:
-      "Tar regularly washes onto the beaches by UCSB's Coal Oil Point because the area sits atop one of the world's largest natural what?",
+      "Surfers cross oceans for a cobblestone right-hand point break on the Santa Barbara–Ventura county line, nicknamed the 'Queen of the Coast.' What is it?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
-    correct: "b",
+    correct: "a",
     options: [
-      { id: "a", label: "Underwater volcanoes" },
-      { id: "b", label: "Offshore oil and gas seeps" },
-      { id: "c", label: "Clusters of shipwrecks" },
-      { id: "d", label: "Inland tar pits, like La Brea" },
+      { id: "a", label: "Rincon", note: "SB–Ventura line" },
+      { id: "b", label: "Mavericks", note: "Half Moon Bay" },
+      { id: "c", label: "Trestles", note: "San Clemente" },
+      { id: "d", label: "Steamer Lane", note: "Santa Cruz" },
     ],
   },
   q10: {
