@@ -29,9 +29,11 @@
     .qslide::before {
       content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
       background: var(--bg) center/contain no-repeat;
-      opacity: .22;
+      opacity: .45;
     }
     .qslide > * { position: relative; z-index: 1; }
+    /* Anchor question content to the top margin so it doesn't jump slide-to-slide */
+    .slide.qslide { justify-content: flex-start; }
 
     /* Question label */
     .qtopic { font-size: 1.3rem; font-weight: 700; color: #1d4ed8; letter-spacing: .04em; }
@@ -48,6 +50,13 @@
     .opt-line.correct { color: #1b7f33; font-weight: 600; }
     .opt-line.correct .key { color: #1b7f33; }
     .opt-line .check { color: #1b7f33; font-weight: 700; }
+    /* Per-option note (e.g. a temperature) revealed only on the answer slide */
+    .opt-note { color: #b45309; font-weight: 700; margin-left: .4rem;
+      animation: notePop .35s ease both; }
+    @keyframes notePop {
+      from { opacity: 0; transform: translateY(5px) scale(.9); }
+      to   { opacity: 1; transform: none; }
+    }
 
     .chart-cols { display: flex; align-items: stretch; gap: .8rem; height: 44vh; }
     .bar-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
@@ -137,11 +146,13 @@
     // no breakdown) and a "results" slide (column graph, correct highlighted).
     (function buildSlides() {
       const podium = document.querySelector("[data-podium]");
-      const optList = (poll, mark) => poll.options.map((o, i) =>
-        `<li class="opt-line${mark && poll.correct === o.id ? " correct" : ""}">` +
-        `<span class="key">${letter(i)}.</span><span class="text">${o.label}</span>` +
-        `<span class="check">${mark && poll.correct === o.id ? "✓" : ""}</span></li>`
-      ).join("");
+      const optList = (poll, mark) => poll.options.map((o, i) => {
+        const isCorrect = mark && poll.correct === o.id;
+        const note = mark && o.note ? `<span class="opt-note">${o.note}</span>` : "";
+        return `<li class="opt-line${isCorrect ? " correct" : ""}">` +
+          `<span class="key">${letter(i)}.</span><span class="text">${o.label}</span>${note}` +
+          `<span class="check">${isCorrect ? "✓" : ""}</span></li>`;
+      }).join("");
 
       POLL_ORDER.forEach((id, n) => {
         const poll = POLLS[id];

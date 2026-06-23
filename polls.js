@@ -6,6 +6,9 @@
 // the deck and phones follow this file's order automatically. Reload the page
 // (or push to redeploy) to see your changes.
 //
+// An option may carry an optional `note` (e.g. note: "~100 °C"). The note is
+// hidden while voting and pops in next to the label on the answer slide.
+//
 // `background` is the image shown behind that question's slides. Drop a file
 // into the pics/ folder and set background to its path, e.g.
 // background: "pics/kelp.jpg". The shrimp placeholder is just a default —
@@ -20,10 +23,10 @@ export const POLLS = {
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
     correct: "c",
     options: [
-      { id: "a", label: "Boiling water" },
-      { id: "b", label: "A campfire" },
-      { id: "c", label: "The surface of the sun" },
-      { id: "d", label: "A lightning bolt" },
+      { id: "a", label: "Boiling water", note: "~100 °C" },
+      { id: "b", label: "A campfire", note: "~1,000 °C" },
+      { id: "c", label: "The surface of the sun", note: "~4,800 °C" },
+      { id: "d", label: "A lightning bolt", note: "~30,000 °C" },
     ],
   },
   q2: {
