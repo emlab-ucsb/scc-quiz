@@ -49,7 +49,7 @@ export const POLLS = {
     options: [
       { id: "a", label: "A space shuttle launch", note: "~30 m/s²" },
       { id: "b", label: "A thrown baseball", note: "~45 m/s²" },
-      { id: "c", label: "A sprinting cheetah", note: "~13,000 m/s²" },
+      { id: "c", label: "A sprinting cheetah", note: "~10 m/s²" },
       { id: "d", label: "A .22-caliber bullet", note: "~100,000 m/s²" },
     ],
   },
@@ -67,7 +67,7 @@ export const POLLS = {
   },
   q5: {
     question:
-      "Chasing giant squid in the dark, a sperm whale can hold its breath and dive to depths of roughly how much?",
+      "Chasing giant squid in the dark, the deepest a sperm whale has been observed to dive is approximately...",
     background: "pics/640x427-sperm-whale.png",
     correct: "b",
     options: [
@@ -79,7 +79,7 @@ export const POLLS = {
   },
   q6: {
     question:
-      "Which of the following businesses did NOT originate in Santa Barbara?",
+      "Which of the following businesses did NOT originate in Santa Barbara County?",
     background: "pics/aerial-view-ocean-front.jpg",
     correct: "a",
     options: [
