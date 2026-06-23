@@ -82,6 +82,17 @@
       }
     })();
 
+    // `?reset=1` wipes this device's saved name so the join screen returns.
+    // Strip the flag from the URL afterward so a reload doesn't keep resetting.
+    const params = new URLSearchParams(location.search);
+    if (params.get("reset")) {
+      store.removeItem("playerId");
+      store.removeItem("handle");
+      params.delete("reset");
+      const qs = params.toString();
+      history.replaceState(null, "", location.pathname + (qs ? "?" + qs : ""));
+    }
+
     let currentPoll = undefined;
     let player = getPlayer();
 
