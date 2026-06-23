@@ -7,11 +7,18 @@
   .join-count { font-size: 1.8rem; font-weight: 700; color: #43a047; margin-bottom: .75rem; }
   .join-url { font-size: 1rem; color: #9ad; word-break: break-all; }
 
-  .poll-chart { display: flex; flex-direction: column; gap: .9rem; margin-top: 1.5rem; }
-  .poll-chart .bar-row { display: flex; flex-direction: column; gap: .3rem; }
-  .poll-chart .bar-top { display: flex; justify-content: space-between; font-size: 1.2rem; }
-  .poll-chart .bar-track { background: rgba(255,255,255,.12); border-radius: 8px; height: 32px; overflow: hidden; }
-  .poll-chart .bar-fill { height: 100%; width: 0; border-radius: 8px;
-    background: linear-gradient(90deg, #2e7d32, #43a047); transition: width .4s ease; }
+  /* Vertical column chart (sits in the right column of poll slides). */
+  .poll-chart { margin-top: .5rem; }
+  .chart-cols { display: flex; align-items: stretch; gap: .6rem; height: 300px; }
+  .chart-cols .bar-col { flex: 1; min-width: 0; display: flex; flex-direction: column;
+    align-items: center; gap: .3rem; }
+  .chart-cols .bar-count { font-size: .95rem; color: #cfd8dc; white-space: nowrap; }
+  .chart-cols .bar-track { flex: 1; width: 72%; display: flex; align-items: flex-end; }
+  .chart-cols .bar-fill { width: 100%; height: 0; border-radius: 7px 7px 0 0;
+    background: linear-gradient(180deg, #43a047, #2e7d32); transition: height .4s ease; }
+  .chart-cols .bar-label { font-size: 1.05rem; font-weight: 600; color: #eee; }
+
+  .poll-stats { font-size: 1.15rem; color: #9ad; margin-bottom: .6rem; }
+  .poll-empty { color: #888; font-size: 1.1rem; }
 </style>
 <script type="module" src="poll-deck.js"></script>

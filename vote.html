@@ -33,6 +33,11 @@
     button.opt:active { transform: scale(.98); }
     button.opt:disabled { opacity: .5; }
     button.opt.chosen { background: #1b5e20; border-color: #2e7d32; }
+    input.numinput {
+      font-size: 1.8rem; padding: 1.1rem; width: 100%; text-align: center;
+      border: 2px solid #444; border-radius: 14px; background: #1c1c1f; color: #eee;
+      margin-bottom: 1rem;
+    }
     .status { font-size: 1.1rem; text-align: center; min-height: 1.5em; color: #9ad; }
     .msg { text-align: center; color: #888; margin-top: 2rem; }
   </style>
@@ -77,26 +82,69 @@
 
     function render() {
       statusEl.textContent = "";
-      if (!currentPoll || !POLLS[currentPoll]) {
+      optionsEl.innerHTML = "";
+      const poll = POLLS[currentPoll];
+      if (!currentPoll || !poll) {
         questionEl.textContent = "Waiting for the next question…";
-        optionsEl.innerHTML = "";
         return;
       }
-      const { question, options } = POLLS[currentPoll];
-      questionEl.textContent = question;
-      const alreadyVoted = localStorage.getItem(votedKey(currentPoll));
+      questionEl.textContent = poll.question;
+      const already = localStorage.getItem(votedKey(currentPoll));
+      if (poll.type === "number") renderNumber(poll, already);
+      else renderChoice(poll, already);
+    }
 
-      optionsEl.innerHTML = "";
-      for (const opt of options) {
+    function renderChoice(poll, already) {
+      for (const opt of poll.options) {
         const btn = document.createElement("button");
         btn.className = "opt";
         btn.textContent = opt.label;
-        if (alreadyVoted === opt.id) btn.classList.add("chosen");
-        if (alreadyVoted) btn.disabled = true;
+        if (already === opt.id) btn.classList.add("chosen");
+        if (already) btn.disabled = true;
         btn.addEventListener("click", () => castVote(opt));
         optionsEl.appendChild(btn);
       }
-      if (alreadyVoted) statusEl.textContent = "✓ Your vote is in";
+      if (already) statusEl.textContent = "✓ Your vote is in";
+    }
+
+    function renderNumber(poll, already) {
+      if (already != null) {
+        statusEl.textContent = `✓ You answered ${poll.unit || ""}${already}`;
+        return;
+      }
+      const input = document.createElement("input");
+      input.type = "number";
+      input.className = "numinput";
+      input.inputMode = "decimal";
+      if (poll.min != null) input.min = poll.min;
+      if (poll.max != null) input.max = poll.max;
+      if (poll.step != null) input.step = poll.step;
+      input.placeholder = poll.placeholder || "Your number";
+      const btn = document.createElement("button");
+      btn.className = "opt";
+      btn.textContent = "Submit";
+      btn.addEventListener("click", () => submitNumber(poll, input));
+      input.addEventListener("keydown", (e) => { if (e.key === "Enter") submitNumber(poll, input); });
+      optionsEl.appendChild(input);
+      optionsEl.appendChild(btn);
+    }
+
+    async function submitNumber(poll, input) {
+      const pollId = currentPoll;
+      const val = parseFloat(input.value);
+      if (!isFinite(val)) { statusEl.textContent = "Enter a number"; return; }
+      if (poll.min != null && val < poll.min) { statusEl.textContent = `Must be ≥ ${poll.min}`; return; }
+      if (poll.max != null && val > poll.max) { statusEl.textContent = `Must be ≤ ${poll.max}`; return; }
+      input.disabled = true;
+      try {
+        await push(ref(db, `rooms/${room}/responses/${pollId}`), val);
+        localStorage.setItem(votedKey(pollId), String(val));
+        if (pollId === currentPoll) render();
+      } catch (e) {
+        statusEl.textContent = "Couldn't submit — try again";
+        input.disabled = false;
+        console.error(e);
+      }
     }
 
     async function castVote(opt) {

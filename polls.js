@@ -31,7 +31,25 @@ export const POLLS = {
       { id: "d", label: "4 °C or more" },
     ],
   },
+  // Free-number questions: phone shows a number input; deck shows a histogram.
+  q4: {
+    type: "number",
+    question: "Now pin it down: your social cost of CO₂ (US$ / tonne)",
+    unit: "$",
+    min: 0,
+    max: 2000,
+    placeholder: "e.g. 185",
+  },
+  q5: {
+    type: "number",
+    question: "Your number: peak warming above pre-industrial (°C)",
+    unit: "",
+    min: 0,
+    max: 8,
+    step: 0.1,
+    placeholder: "e.g. 2.7",
+  },
 };
 
 // Order presenter advances through. Must match keys in POLLS.
-export const POLL_ORDER = ["q1", "q2", "q3"];
+export const POLL_ORDER = ["q1", "q4", "q2", "q3", "q5"];
