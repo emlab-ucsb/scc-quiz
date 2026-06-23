@@ -80,7 +80,7 @@
   <!-- Join -->
   <section class="slide" data-join>
     <h1>🎲 Trivia Night</h1>
-    <p class="muted">Six topics · 18 questions · one champion</p>
+    <p class="muted">18 questions · one champion</p>
     <div class="join-box">
       <div class="qr"></div>
       <div>
@@ -114,7 +114,7 @@
   <script type="module">
     import { ref, onValue, set, get } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
     import { db } from "./firebase-config.js";
-    import { POLLS, TOPICS, scoreAnswer } from "./polls.js";
+    import { POLLS, POLL_ORDER, scoreAnswer } from "./polls.js";
 
     const ROOM = "TTT";
     const letter = (i) => String.fromCharCode(65 + i);
@@ -122,7 +122,6 @@
     // ---- build question slides before the podium ----
     // Each question becomes two slides: an "ask" slide (options + live tally,
     // no breakdown) and a "results" slide (column graph, correct highlighted).
-    // Topics are interleaved round-robin so questions aren't grouped by topic.
     (function buildSlides() {
       const podium = document.querySelector("[data-podium]");
       const optList = (poll, mark) => poll.options.map((o, i) =>
@@ -131,21 +130,10 @@
         `<span class="check">${mark && poll.correct === o.id ? "✓" : ""}</span></li>`
       ).join("");
 
-      // Map each poll id to its topic, then interleave across topics.
-      const topicOf = {};
-      for (const t of TOPICS) for (const id of t.polls) topicOf[id] = t;
-      const lists = TOPICS.map((t) => t.polls.slice());
-      const order = [];
-      for (let more = true; more; ) {
-        more = false;
-        for (const l of lists) if (l.length) { order.push(l.shift()); more = true; }
-      }
-
-      order.forEach((id, n) => {
+      POLL_ORDER.forEach((id, n) => {
         const poll = POLLS[id];
-        const t = topicOf[id];
         const head =
-          `<div class="qtopic">Question ${n + 1} / ${order.length} · ${t.icon} ${t.name}</div>` +
+          `<div class="qtopic">Question ${n + 1} / ${POLL_ORDER.length}</div>` +
           `<h2>${poll.question}</h2>`;
 
         const ask = document.createElement("section");
