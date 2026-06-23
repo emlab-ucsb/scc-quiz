@@ -88,7 +88,7 @@
   <!-- Join -->
   <section class="slide" data-join>
     <h1>🎲 Trivia Night</h1>
-    <p class="muted">18 questions · one champion</p>
+    <p class="muted"><span class="qcount">18</span> questions · one champion</p>
     <div class="join-box">
       <div class="qr"></div>
       <div>
@@ -113,7 +113,7 @@
   <section class="slide" data-podium>
     <h2>🏆 Final leaderboard</h2>
     <div class="podium"><div class="poll-empty">Tallying…</div></div>
-    <p class="muted">One point per correct answer across all 18 questions.</p>
+    <p class="muted">One point per correct answer across all <span class="qcount">18</span> questions.</p>
   </section>
 
   <div class="pagenum"></div>
@@ -170,6 +170,9 @@
         podium.before(results);
       });
     })();
+
+    // Keep the "N questions" labels in sync with the bank.
+    document.querySelectorAll(".qcount").forEach((e) => (e.textContent = POLL_ORDER.length));
 
     const slides = [...document.querySelectorAll(".slide")];
     const pagenum = document.querySelector(".pagenum");

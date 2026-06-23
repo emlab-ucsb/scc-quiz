@@ -16,6 +16,18 @@
 export const POLLS = {
   q1: {
     question:
+      "When a pistol shrimp snaps its claw shut, the collapsing cavitation bubble briefly flashes light and reaches a peak temperature roughly comparable to what?",
+    background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
+    correct: "c",
+    options: [
+      { id: "a", label: "Boiling water" },
+      { id: "b", label: "A campfire" },
+      { id: "c", label: "The surface of the sun" },
+      { id: "d", label: "A lightning bolt" },
+    ],
+  },
+  q2: {
+    question:
       "The 1969 Santa Barbara oil spill helped inspire what annual event, first held in 1970?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
     correct: "b",
@@ -26,7 +38,7 @@ export const POLLS = {
       { id: "d", label: "Coastal Cleanup Day" },
     ],
   },
-  q2: {
+  q3: {
     question:
       "Who first calculated, in 1896, that CO₂ from burning coal could warm the planet?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -38,7 +50,7 @@ export const POLLS = {
       { id: "d", label: "Guy Callendar" },
     ],
   },
-  q3: {
+  q4: {
     question:
       "UCSB's Shuji Nakamura shared the 2014 Nobel Prize in Physics for inventing what?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -50,7 +62,7 @@ export const POLLS = {
       { id: "d", label: "The blue LED" },
     ],
   },
-  q4: {
+  q5: {
     question:
       "Giant kelp, the backbone of Santa Barbara's underwater forests, can grow as fast as how much per day?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -62,7 +74,7 @@ export const POLLS = {
       { id: "d", label: "Up to 20 feet" },
     ],
   },
-  q5: {
+  q6: {
     question:
       "Who shared the 2019 Nobel Prize in Economics with Esther Duflo and Michael Kremer for an experimental approach to fighting global poverty?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -74,7 +86,7 @@ export const POLLS = {
       { id: "d", label: "Jeffrey Sachs" },
     ],
   },
-  q6: {
+  q7: {
     question:
       "The term 'artificial intelligence' was coined at a now-famous 1956 summer workshop held at which university?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -86,7 +98,7 @@ export const POLLS = {
       { id: "d", label: "Carnegie Mellon" },
     ],
   },
-  q7: {
+  q8: {
     question:
       "Founded in 1786, Old Mission Santa Barbara is known by what nickname?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -98,7 +110,7 @@ export const POLLS = {
       { id: "d", label: "Crown of California" },
     ],
   },
-  q8: {
+  q9: {
     question:
       "The famous 'Keeling Curve,' measured at Mauna Loa since 1958, tracks the rising concentration of what gas?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -110,7 +122,7 @@ export const POLLS = {
       { id: "d", label: "Nitrous oxide" },
     ],
   },
-  q9: {
+  q10: {
     question:
       "Alan Heeger shared the 2000 Nobel Prize in Chemistry for the discovery of conductive what?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -122,7 +134,7 @@ export const POLLS = {
       { id: "d", label: "Liquid crystals" },
     ],
   },
-  q10: {
+  q11: {
     question:
       "Sea otters are a keystone species because they keep what kelp-grazing animal in check?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -134,7 +146,7 @@ export const POLLS = {
       { id: "d", label: "Sea urchins" },
     ],
   },
-  q11: {
+  q12: {
     question:
       "Muhammad Yunus and the Grameen Bank won the 2006 Nobel Peace Prize for pioneering what?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -146,7 +158,7 @@ export const POLLS = {
       { id: "d", label: "Crop insurance" },
     ],
   },
-  q12: {
+  q13: {
     question:
       "In what year did IBM's Deep Blue defeat reigning world chess champion Garry Kasparov in a full match?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -158,7 +170,7 @@ export const POLLS = {
       { id: "d", label: "2011" },
     ],
   },
-  q13: {
+  q14: {
     question:
       "A 1925 earthquake leveled much of downtown Santa Barbara, prompting a rebuild in what signature architectural style?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -170,7 +182,7 @@ export const POLLS = {
       { id: "d", label: "Spanish Colonial Revival" },
     ],
   },
-  q14: {
+  q15: {
     question:
       "2024 became the first full calendar year in which global average temperature exceeded what level of warming above pre-industrial?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -182,7 +194,7 @@ export const POLLS = {
       { id: "d", label: "0.5 °C" },
     ],
   },
-  q15: {
+  q16: {
     question:
       "Roughly how many Nobel Prizes have UCSB faculty won since 1998, making it one of the era's most decorated public universities?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -194,7 +206,7 @@ export const POLLS = {
       { id: "d", label: "Zero" },
     ],
   },
-  q16: {
+  q17: {
     question:
       "Coral bleaching happens when heat-stressed corals expel what symbiotic organism?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -206,7 +218,7 @@ export const POLLS = {
       { id: "d", label: "Sea anemones" },
     ],
   },
-  q17: {
+  q18: {
     question:
       "Amartya Sen helped create what index that measures development beyond GDP?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
@@ -218,7 +230,7 @@ export const POLLS = {
       { id: "d", label: "Human Development Index" },
     ],
   },
-  q18: {
+  q19: {
     question:
       "Today's leading AI systems — and the likely path ahead — are built on what neural-network architecture introduced in 2017?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
