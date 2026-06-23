@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Social Cost of Carbon</title>
+  <title>Trivia Night</title>
   <style>
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
@@ -17,25 +17,44 @@
       justify-content: center; padding: 5vh 8vw; gap: 1rem;
     }
     .slide.active { display: flex; }
-    h1 { font-size: 3rem; margin: 0; line-height: 1.1; }
+    h1 { font-size: 3.4rem; margin: 0; line-height: 1.1; }
     h2 { font-size: 2.3rem; margin: 0 0 1rem; line-height: 1.15; }
     p, li { font-size: 1.6rem; line-height: 1.5; }
-    ul { margin: 0; padding-left: 1.4em; }
-    blockquote { border-left: 4px solid #43a047; margin: 0; padding-left: 1rem; color: #d7ffd9; }
+    ul { margin: 0; padding-left: 0; list-style: none; }
+    ul li { margin: .5rem 0; }
     .muted { color: #8a8f98; font-size: 1.1rem; }
     .accent { color: #43a047; }
 
+    /* Topic label on a question slide */
+    .qtopic { font-size: 1.3rem; font-weight: 700; color: #9ad; letter-spacing: .04em; }
+
+    /* Topic divider slide */
+    .divider { align-items: center; justify-content: center; text-align: center; }
+    .divider .big-icon { font-size: 7rem; line-height: 1; }
+    .divider h1 { font-size: 4rem; }
+
     /* Two-column poll layout: prompt left, chart right */
     .poll-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .opt-line { display: flex; align-items: baseline; gap: .6rem; }
+    .opt-line .key { color: #9ad; font-weight: 700; min-width: 1.4em; }
+    .opt-line.correct { color: #b9f6ca; }
+    .opt-line.correct .key { color: #69f0ae; }
+    .opt-line .check { color: #69f0ae; font-weight: 700; }
+
     .chart-cols { display: flex; align-items: stretch; gap: .8rem; height: 46vh; }
     .bar-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
     .bar-count { font-size: 1.1rem; color: #cfd8dc; white-space: nowrap; }
     .bar-track { flex: 1; width: 70%; display: flex; align-items: flex-end; }
     .bar-fill { width: 100%; height: 0; border-radius: 8px 8px 0 0;
       background: linear-gradient(180deg, #4caf50, #2e7d32); transition: height .4s ease; }
+    .bar-fill.correct { background: linear-gradient(180deg, #ffd54f, #c9a227); }
     .bar-label { font-size: 1.3rem; font-weight: 700; }
-    .poll-stats { font-size: 1.4rem; color: #9ad; margin-bottom: .6rem; }
+    .bar-label.correct { color: #ffd54f; }
     .poll-empty { color: #777; font-size: 1.3rem; }
+
+    /* Live answer tally on the ask slide */
+    .tally { font-size: 2.2rem; font-weight: 800; color: #43a047; margin-top: 1rem; }
+    .tally-hint { color: #555; font-size: 1rem; }
 
     /* Join slide */
     .join-box { display: flex; gap: 3rem; align-items: center; }
@@ -58,142 +77,35 @@
   </style>
 </head>
 <body>
-  <!-- 1 -->
+  <!-- Join -->
   <section class="slide" data-join>
-    <h1>The Social Cost of Carbon</h1>
-    <p class="muted">A playful poll through a serious number · TTT</p>
+    <h1>🎲 Trivia Night</h1>
+    <p class="muted">Five topics · 15 questions · one champion</p>
     <div class="join-box">
       <div class="qr"></div>
       <div>
         <div class="join-count">👥 0 phones connected</div>
         <div class="join-url"></div>
-        <p class="muted">Scan to join — answers follow the slides.</p>
+        <p class="muted">Scan to join — questions follow the slides.</p>
       </div>
     </div>
   </section>
 
-  <!-- 2 -->
-  <section class="slide">
-    <h2>Why put a price on carbon?</h2>
-    <p>Climate policy is a <span class="accent">cost–benefit problem</span>:</p>
-    <ul>
-      <li>Cutting emissions costs something <b>today</b>.</li>
-      <li>It avoids damages <b>tomorrow</b> — heat, floods, lost crops, lives.</li>
-    </ul>
-    <p>To weigh them we need one number: the <b>price of a tonne of CO₂</b>.</p>
+  <!-- How to play -->
+  <section class="slide divider">
+    <div class="big-icon">📋</div>
+    <h1>How to play</h1>
+    <p>Pick a name or go anonymous. Answer on your phone before we reveal.</p>
+    <p class="accent">+1 point for every correct answer. Most points wins.</p>
   </section>
 
-  <!-- 3 -->
-  <section class="slide">
-    <h2>The Social Cost of Carbon</h2>
-    <blockquote>The present value of the damages from emitting one extra tonne of CO₂.</blockquote>
-    <p>The workhorse behind federal cost–benefit analysis. A higher SCC justifies more aggressive policy.</p>
-  </section>
+  <!-- Topic dividers + question slides are generated here -->
 
-  <!-- 4 -->
-  <section class="slide" data-poll="q1">
-    <h2>Your gut: what's a tonne of CO₂ worth?</h2>
-    <div class="poll-grid">
-      <ul>
-        <li><b>A.</b> Under $25</li>
-        <li><b>B.</b> Around $50</li>
-        <li><b>C.</b> Around $185</li>
-        <li><b>D.</b> Over $300</li>
-      </ul>
-      <div class="poll-chart"></div>
-    </div>
-  </section>
-
-  <!-- 5 -->
-  <section class="slide" data-poll="q4">
-    <h2>Now pin it down</h2>
-    <div class="poll-grid">
-      <p>Type the <b>exact</b> social cost you'd defend, in <b>US$ / tonne</b>, on your phone. No bins — a real number.</p>
-      <div class="poll-chart"></div>
-    </div>
-  </section>
-
-  <!-- 6 -->
-  <section class="slide">
-    <h2>Rennert et al. (2022): a higher number</h2>
-    <ul>
-      <li>Central estimate: <b class="accent">$185 per tonne</b> (2% discount rate).</li>
-      <li><b>3.6×</b> the $51 the U.S. government was using.</li>
-      <li>Range roughly <b>$44 – $413</b> (5th–95th percentile).</li>
-    </ul>
-    <p class="muted">Updated four things at once: socioeconomics, climate, damages, discounting.</p>
-  </section>
-
-  <!-- 7 -->
-  <section class="slide" data-poll="q2">
-    <h2>Weitzman's Dismal Theorem</h2>
-    <div class="poll-grid">
-      <div>
-        <p>With fat-tailed catastrophic risk, the "correct" price could be…</p>
-        <ul>
-          <li><b>A.</b> A modest, finite number</li>
-          <li><b>B.</b> Effectively unbounded</li>
-          <li><b>C.</b> Zero — too uncertain to act</li>
-          <li><b>D.</b> Whatever the discount rate implies</li>
-        </ul>
-      </div>
-      <div class="poll-chart"></div>
-    </div>
-  </section>
-
-  <!-- 8 -->
-  <section class="slide">
-    <h2>Fat tails break the tidy number</h2>
-    <p>Weitzman (2009): if catastrophe sits in a <b>fat tail</b> and marginal utility blows up as consumption collapses, expected damages can be <b class="accent">unbounded</b> — standard cost–benefit "breaks down."</p>
-    <ul>
-      <li>A single $185 hides enormous tail risk.</li>
-      <li><b>Structural uncertainty</b> can matter more than the discount rate.</li>
-    </ul>
-  </section>
-
-  <!-- 9 -->
-  <section class="slide" data-poll="q3">
-    <h2>What will we <i>actually</i> hit?</h2>
-    <div class="poll-grid">
-      <div>
-        <p>Peak warming vs. pre-industrial — your honest bet:</p>
-        <ul>
-          <li><b>A.</b> 1.5 °C or less</li>
-          <li><b>B.</b> Around 2 °C</li>
-          <li><b>C.</b> Around 3 °C</li>
-          <li><b>D.</b> 4 °C or more</li>
-        </ul>
-      </div>
-      <div class="poll-chart"></div>
-    </div>
-  </section>
-
-  <!-- 10 -->
-  <section class="slide" data-poll="q5">
-    <h2>Put a number on it</h2>
-    <div class="poll-grid">
-      <p>On your phone: your single best guess for <b>peak warming in °C</b> above pre-industrial.</p>
-      <div class="poll-chart"></div>
-    </div>
-  </section>
-
-  <!-- 11 -->
-  <section class="slide">
-    <h2>From a number to a conversation</h2>
-    <ul>
-      <li>The SCC is the <b>bridge</b> from climate science to policy.</li>
-      <li>Rennert et al.: a defensible <b class="accent">$185</b> — up from $51.</li>
-      <li>Weitzman: maybe no single number can hold the <b>tail risk</b>.</li>
-      <li>What we <i>expect</i> to hit shapes what we'll pay now.</li>
-    </ul>
-    <p class="muted">Rennert et al., Nature 610 (2022); Weitzman, REStat 91 (2009).</p>
-  </section>
-
-  <!-- 12 -->
+  <!-- Podium -->
   <section class="slide" data-podium>
-    <h2>🏆 The podium</h2>
+    <h2>🏆 Final leaderboard</h2>
     <div class="podium"><div class="poll-empty">Tallying…</div></div>
-    <p class="muted">Scored: gut SCC, your SCC number, and the Dismal Theorem. Opinion questions weren't scored.</p>
+    <p class="muted">One point per correct answer across all 15 questions.</p>
   </section>
 
   <div class="pagenum"></div>
@@ -202,13 +114,61 @@
   <script type="module">
     import { ref, onValue, set, get } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
     import { db } from "./firebase-config.js";
-    import { POLLS, scoreAnswer } from "./polls.js";
+    import { POLLS, TOPICS, scoreAnswer } from "./polls.js";
 
     const ROOM = "TTT";
+    const letter = (i) => String.fromCharCode(65 + i);
+
+    // ---- build topic + question slides before the podium ----
+    // Each question becomes two slides: an "ask" slide (options + live tally,
+    // no breakdown) and a "results" slide (column graph, correct highlighted).
+    (function buildSlides() {
+      const podium = document.querySelector("[data-podium]");
+      const optList = (poll, mark) => poll.options.map((o, i) =>
+        `<li class="opt-line${mark && poll.correct === o.id ? " correct" : ""}">` +
+        `<span class="key">${letter(i)}.</span><span class="text">${o.label}</span>` +
+        `<span class="check">${mark && poll.correct === o.id ? "✓" : ""}</span></li>`
+      ).join("");
+
+      for (const t of TOPICS) {
+        const divider = document.createElement("section");
+        divider.className = "slide divider";
+        divider.innerHTML = `<div class="big-icon">${t.icon}</div><h1>${t.name}</h1>`;
+        podium.before(divider);
+
+        t.polls.forEach((id, n) => {
+          const poll = POLLS[id];
+          const head =
+            `<div class="qtopic">${t.icon} ${t.name} · ${n + 1} of ${t.polls.length}</div>` +
+            `<h2>${poll.question}</h2>`;
+
+          const ask = document.createElement("section");
+          ask.className = "slide";
+          ask.dataset.poll = id;
+          ask.dataset.mode = "ask";
+          ask.innerHTML = head +
+            `<ul>${optList(poll, false)}</ul>` +
+            `<div class="tally">⏳ 0 answers in</div>` +
+            `<div class="tally-hint">→ to reveal the answer</div>`;
+          podium.before(ask);
+
+          const results = document.createElement("section");
+          results.className = "slide";
+          results.dataset.poll = id;
+          results.dataset.mode = "results";
+          results.innerHTML = head +
+            `<div class="poll-grid"><ul>${optList(poll, true)}</ul>` +
+            `<div class="poll-chart"><div class="poll-empty">No answers yet…</div></div></div>`;
+          podium.before(results);
+        });
+      }
+    })();
+
     const slides = [...document.querySelectorAll(".slide")];
     const pagenum = document.querySelector(".pagenum");
     let idx = 0;
     let pollUnsub = null;
+    let cur = null; // { slide, poll, mode, answers }
 
     function show(i) {
       idx = Math.max(0, Math.min(slides.length - 1, i));
@@ -219,12 +179,16 @@
 
     function onEnter(slide) {
       if (pollUnsub) { pollUnsub(); pollUnsub = null; }
+      cur = null;
       const pollId = slide.dataset.poll;
+      const mode = slide.dataset.mode;
       if (pollId && POLLS[pollId]) {
-        set(ref(db, `rooms/${ROOM}/currentPoll`), pollId);
-        const chart = slide.querySelector(".poll-chart");
+        // Open voting only while asking; the results slide closes it.
+        set(ref(db, `rooms/${ROOM}/currentPoll`), mode === "ask" ? pollId : null);
+        cur = { slide, poll: POLLS[pollId], mode, answers: {} };
         pollUnsub = onValue(ref(db, `rooms/${ROOM}/answers/${pollId}`), (snap) => {
-          renderResults(chart, POLLS[pollId], snap.val() || {});
+          cur.answers = snap.val() || {};
+          paint();
         });
       } else {
         set(ref(db, `rooms/${ROOM}/currentPoll`), null); // phones wait
@@ -232,67 +196,42 @@
       }
     }
 
-    // ---- charts ----
-    const letter = (i) => String.fromCharCode(65 + i);
+    function paint() {
+      if (!cur) return;
+      const total = Object.keys(cur.answers).length;
+      if (cur.mode === "ask") {
+        cur.slide.querySelector(".tally").textContent =
+          `⏳ ${total} answer${total === 1 ? "" : "s"} in`;
+      } else {
+        renderResults();
+      }
+    }
 
-    function columnChart(bars) {
+    // ---- results column graph (bar height = number of answers) ----
+    function renderResults() {
+      const { slide, poll, answers } = cur;
+      const chart = slide.querySelector(".poll-chart");
+      const counts = {};
+      for (const r of Object.values(answers)) counts[r.a] = (counts[r.a] || 0) + 1;
+      const total = Object.keys(answers).length;
+      const max = Math.max(1, ...poll.options.map((o) => counts[o.id] || 0));
+
+      chart.innerHTML = "";
+      if (!total) { chart.innerHTML = `<div class="poll-empty">No answers in.</div>`; return; }
       const el = document.createElement("div");
       el.className = "chart-cols";
-      for (const b of bars) {
+      poll.options.forEach((o, i) => {
+        const c = counts[o.id] || 0;
+        const isCorrect = poll.correct === o.id;
         const col = document.createElement("div");
         col.className = "bar-col";
         col.innerHTML =
-          `<div class="bar-count">${b.top}</div>` +
-          `<div class="bar-track"><div class="bar-fill" style="height:${b.h}%"></div></div>` +
-          `<div class="bar-label">${b.label}</div>`;
+          `<div class="bar-count">${c}</div>` +
+          `<div class="bar-track"><div class="bar-fill${isCorrect ? " correct" : ""}" style="height:${Math.round((c / max) * 100)}%"></div></div>` +
+          `<div class="bar-label${isCorrect ? " correct" : ""}">${letter(i)}${isCorrect ? " ✓" : ""}</div>`;
         el.appendChild(col);
-      }
-      return el;
-    }
-
-    function renderResults(chart, poll, answers) {
-      const values = Object.values(answers).map((r) => r.a);
-      chart.innerHTML = "";
-      if (poll.type === "number") return renderNumbers(chart, poll, values);
-      const counts = {};
-      for (const v of values) counts[v] = (counts[v] || 0) + 1;
-      const total = values.length;
-      const bars = poll.options.map((o, i) => {
-        const c = counts[o.id] || 0;
-        const pct = total ? Math.round((c / total) * 100) : 0;
-        return { label: letter(i), top: `${c} (${pct}%)`, h: pct };
       });
-      chart.appendChild(columnChart(bars));
-    }
-
-    function renderNumbers(chart, poll, raw) {
-      const vals = raw.map(Number).filter((v) => isFinite(v)).sort((a, b) => a - b);
-      if (!vals.length) { chart.innerHTML = `<div class="poll-empty">No numbers yet…</div>`; return; }
-      const n = vals.length;
-      const mean = vals.reduce((a, b) => a + b, 0) / n;
-      const median = n % 2 ? vals[(n - 1) / 2] : (vals[n / 2 - 1] + vals[n / 2]) / 2;
-      const fmt = (x) => (poll.step && poll.step < 1 ? x.toFixed(1) : String(Math.round(x)));
-      const u = poll.unit || "";
-      const stats = document.createElement("div");
-      stats.className = "poll-stats";
-      stats.textContent = `n=${n} · mean ${u}${fmt(mean)} · median ${u}${fmt(median)}`;
-      chart.appendChild(stats);
-
-      const lo = poll.min != null ? poll.min : vals[0];
-      const hi = poll.max != null ? poll.max : vals[n - 1];
-      const span = hi - lo || 1;
-      const BINS = 7;
-      const counts = new Array(BINS).fill(0);
-      for (const v of vals) {
-        let i = Math.floor(((v - lo) / span) * BINS);
-        i = Math.max(0, Math.min(BINS - 1, i));
-        counts[i]++;
-      }
-      const max = Math.max(...counts, 1);
-      const bars = counts.map((c, i) => ({
-        label: fmt(lo + (span * i) / BINS), top: c || "", h: Math.round((c / max) * 100),
-      }));
-      chart.appendChild(columnChart(bars));
+      chart.appendChild(el);
     }
 
     // ---- podium ----
@@ -311,7 +250,7 @@
       }
       const ranked = Object.values(scores).filter((s) => s.score > 0).sort((a, b) => b.score - a.score);
       container.innerHTML = "";
-      if (!ranked.length) { container.innerHTML = `<div class="poll-empty">No scored answers yet.</div>`; return; }
+      if (!ranked.length) { container.innerHTML = `<div class="poll-empty">No correct answers yet.</div>`; return; }
       const medals = ["🥇", "🥈", "🥉"];
       const cls = ["gold", "silver", "bronze"];
       const order = [1, 0, 2]; // silver, gold, bronze for visual centering
@@ -322,7 +261,7 @@
         stand.className = `stand ${cls[r]}`;
         stand.innerHTML =
           `<div class="name">${s.handle}</div>` +
-          `<div class="score">${s.score} pts</div>` +
+          `<div class="score">${s.score} correct</div>` +
           `<div class="block">${medals[r]}</div>`;
         container.appendChild(stand);
       }

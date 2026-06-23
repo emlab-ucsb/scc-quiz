@@ -93,10 +93,15 @@
     }
 
     function randomHandle() {
-      const adj = ["Swift", "Brave", "Sly", "Calm", "Bold", "Lucky", "Cosmic", "Quiet"];
-      const animal = ["Otter", "Falcon", "Fox", "Heron", "Lynx", "Moth", "Orca", "Wren"];
-      const pick = (a) => a[Math.floor(Math.random() * a.length)];
-      return `${pick(adj)}${pick(animal)}${Math.floor(Math.random() * 90 + 10)}`;
+      const colors = [
+        "Crimson", "Scarlet", "Amber", "Gold", "Olive", "Emerald", "Teal",
+        "Cyan", "Azure", "Cobalt", "Indigo", "Violet", "Magenta", "Rose",
+        "Coral", "Salmon", "Maroon", "Bronze", "Copper", "Lime", "Mint",
+        "Jade", "Turquoise", "Sapphire", "Lavender", "Plum", "Orchid",
+        "Tangerine", "Saffron", "Slate",
+      ];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      return `${color}${Math.floor(Math.random() * 90 + 10)}`;
     }
 
     function startSession() {
