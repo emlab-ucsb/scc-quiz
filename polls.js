@@ -28,14 +28,14 @@ export const POLLS = {
   },
   q2: {
     question:
-      "The 1969 Santa Barbara oil spill helped inspire what annual event, first held in 1970?",
-    background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
+      "Giant kelp, the backbone of Santa Barbara's underwater forests, can grow as fast as how much per day?",
+    background: "pics/header-kelp-structure.jpg",
     correct: "b",
     options: [
-      { id: "a", label: "Arbor Day" },
-      { id: "b", label: "Earth Day" },
-      { id: "c", label: "World Oceans Day" },
-      { id: "d", label: "Coastal Cleanup Day" },
+      { id: "a", label: "About 2 inches" },
+      { id: "b", label: "Up to 2 feet" },
+      { id: "c", label: "About 2 millimeters" },
+      { id: "d", label: "Up to 20 feet" },
     ],
   },
   q3: {
