@@ -78,10 +78,17 @@
     .title-text { text-align: right; line-height: 1.3; }
     .title-text .t-title { font-size: 3rem; font-weight: 800; color: #1b1b1f; margin-bottom: 1.2rem; }
     .title-text .t-sub { font-size: 1.7rem; color: #444; }
+    .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.4vh; }
     .qr { background: #fff; padding: 1.5vh; border-radius: 16px; line-height: 0;
       box-shadow: 0 2px 16px rgba(0,0,0,.15); }
     .qr img, .qr canvas { width: 72vh; height: 72vh; }
     .qr img { display: block; }
+    /* Minimal live counter under the QR */
+    .join-count { display: flex; align-items: center; gap: .55rem;
+      font-size: 1.25rem; color: #6b7280; }
+    .join-count::before { content: ""; width: .62rem; height: .62rem; border-radius: 50%;
+      background: #1b7f33; animation: livePulse 2s ease-in-out infinite; }
+    @keyframes livePulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
 
     /* Podium */
     .podium { display: flex; gap: 2rem; align-items: flex-end; justify-content: center; height: 50vh; }
@@ -105,7 +112,10 @@
       <div class="t-sub">June 23, 2026</div>
       <div class="t-sub">Jordan Wingenroth</div>
     </div>
-    <div class="qr"></div>
+    <div class="qr-wrap">
+      <div class="qr"></div>
+      <div class="join-count" id="joinCount">0 connected</div>
+    </div>
   </section>
 
   <!-- How to play -->
@@ -297,6 +307,11 @@
       voteUrl.searchParams.set("room", ROOM);
       // Render at high resolution; CSS scales it down to ~72vh so it stays crisp.
       new QRCode(slide.querySelector(".qr"), { text: voteUrl.href, width: 1000, height: 1000 });
+      const countEl = slide.querySelector("#joinCount");
+      onValue(ref(db, `rooms/${ROOM}/presence`), (snap) => {
+        const k = snap.size || 0;
+        countEl.textContent = `${k} connected`;
+      });
     })();
 
     // ---- navigation ----
