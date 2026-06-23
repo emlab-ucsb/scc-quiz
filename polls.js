@@ -9,10 +9,10 @@ export const POLLS = {
     topic: "Santa Barbara History",
     question:
       "The 1969 Santa Barbara oil spill helped inspire what annual event, first held in 1970?",
-    correct: "a",
+    correct: "b",
     options: [
-      { id: "a", label: "Earth Day" },
-      { id: "b", label: "Arbor Day" },
+      { id: "a", label: "Arbor Day" },
+      { id: "b", label: "Earth Day" },
       { id: "c", label: "World Oceans Day" },
       { id: "d", label: "Coastal Cleanup Day" },
     ],
@@ -21,11 +21,11 @@ export const POLLS = {
     topic: "Santa Barbara History",
     question:
       "Founded in 1786, Old Mission Santa Barbara is known by what nickname?",
-    correct: "a",
+    correct: "c",
     options: [
-      { id: "a", label: "Queen of the Missions" },
-      { id: "b", label: "King of the Missions" },
-      { id: "c", label: "Jewel of the Coast" },
+      { id: "a", label: "King of the Missions" },
+      { id: "b", label: "Jewel of the Coast" },
+      { id: "c", label: "Queen of the Missions" },
       { id: "d", label: "Crown of California" },
     ],
   },
@@ -33,12 +33,12 @@ export const POLLS = {
     topic: "Santa Barbara History",
     question:
       "A 1925 earthquake leveled much of downtown Santa Barbara, prompting a rebuild in what signature architectural style?",
-    correct: "a",
+    correct: "d",
     options: [
-      { id: "a", label: "Spanish Colonial Revival" },
-      { id: "b", label: "Art Deco" },
-      { id: "c", label: "Victorian" },
-      { id: "d", label: "Brutalist" },
+      { id: "a", label: "Art Deco" },
+      { id: "b", label: "Victorian" },
+      { id: "c", label: "Brutalist" },
+      { id: "d", label: "Spanish Colonial Revival" },
     ],
   },
 
@@ -59,11 +59,11 @@ export const POLLS = {
     topic: "Climate Change",
     question:
       "The famous 'Keeling Curve,' measured at Mauna Loa since 1958, tracks the rising concentration of what gas?",
-    correct: "a",
+    correct: "c",
     options: [
-      { id: "a", label: "Carbon dioxide" },
-      { id: "b", label: "Methane" },
-      { id: "c", label: "Ozone" },
+      { id: "a", label: "Methane" },
+      { id: "b", label: "Ozone" },
+      { id: "c", label: "Carbon dioxide" },
       { id: "d", label: "Nitrous oxide" },
     ],
   },
@@ -71,10 +71,10 @@ export const POLLS = {
     topic: "Climate Change",
     question:
       "2024 became the first full calendar year in which global average temperature exceeded what level of warming above pre-industrial?",
-    correct: "a",
+    correct: "b",
     options: [
-      { id: "a", label: "1.5 °C" },
-      { id: "b", label: "1.0 °C" },
+      { id: "a", label: "1.0 °C" },
+      { id: "b", label: "1.5 °C" },
       { id: "c", label: "2.0 °C" },
       { id: "d", label: "0.5 °C" },
     ],
@@ -85,12 +85,12 @@ export const POLLS = {
     topic: "UCSB Nobel Laureates",
     question:
       "UCSB's Shuji Nakamura shared the 2014 Nobel Prize in Physics for inventing what?",
-    correct: "a",
+    correct: "d",
     options: [
-      { id: "a", label: "The blue LED" },
-      { id: "b", label: "The transistor" },
-      { id: "c", label: "The laser" },
-      { id: "d", label: "Graphene" },
+      { id: "a", label: "The transistor" },
+      { id: "b", label: "The laser" },
+      { id: "c", label: "Graphene" },
+      { id: "d", label: "The blue LED" },
     ],
   },
   uc2: {
@@ -109,11 +109,11 @@ export const POLLS = {
     topic: "UCSB Nobel Laureates",
     question:
       "Roughly how many Nobel Prizes have UCSB faculty won since 1998, making it one of the era's most decorated public universities?",
-    correct: "a",
+    correct: "c",
     options: [
-      { id: "a", label: "Six" },
-      { id: "b", label: "One" },
-      { id: "c", label: "Twenty" },
+      { id: "a", label: "One" },
+      { id: "b", label: "Twenty" },
+      { id: "c", label: "Six" },
       { id: "d", label: "Zero" },
     ],
   },
@@ -123,10 +123,10 @@ export const POLLS = {
     topic: "Marine Biology",
     question:
       "Giant kelp, the backbone of Santa Barbara's underwater forests, can grow as fast as how much per day?",
-    correct: "a",
+    correct: "b",
     options: [
-      { id: "a", label: "Up to 2 feet" },
-      { id: "b", label: "About 2 inches" },
+      { id: "a", label: "About 2 inches" },
+      { id: "b", label: "Up to 2 feet" },
       { id: "c", label: "About 2 millimeters" },
       { id: "d", label: "Up to 20 feet" },
     ],
@@ -135,12 +135,12 @@ export const POLLS = {
     topic: "Marine Biology",
     question:
       "Sea otters are a keystone species because they keep what kelp-grazing animal in check?",
-    correct: "a",
+    correct: "d",
     options: [
-      { id: "a", label: "Sea urchins" },
-      { id: "b", label: "Jellyfish" },
-      { id: "c", label: "Anchovies" },
-      { id: "d", label: "Crabs" },
+      { id: "a", label: "Jellyfish" },
+      { id: "b", label: "Anchovies" },
+      { id: "c", label: "Crabs" },
+      { id: "d", label: "Sea urchins" },
     ],
   },
   mb3: {
@@ -161,11 +161,11 @@ export const POLLS = {
     topic: "Development Economics",
     question:
       "Who shared the 2019 Nobel Prize in Economics with Esther Duflo and Michael Kremer for an experimental approach to fighting global poverty?",
-    correct: "a",
+    correct: "c",
     options: [
-      { id: "a", label: "Abhijit Banerjee" },
-      { id: "b", label: "Amartya Sen" },
-      { id: "c", label: "Paul Romer" },
+      { id: "a", label: "Amartya Sen" },
+      { id: "b", label: "Paul Romer" },
+      { id: "c", label: "Abhijit Banerjee" },
       { id: "d", label: "Jeffrey Sachs" },
     ],
   },
@@ -173,10 +173,10 @@ export const POLLS = {
     topic: "Development Economics",
     question:
       "Muhammad Yunus and the Grameen Bank won the 2006 Nobel Peace Prize for pioneering what?",
-    correct: "a",
+    correct: "b",
     options: [
-      { id: "a", label: "Microcredit" },
-      { id: "b", label: "Foreign aid" },
+      { id: "a", label: "Foreign aid" },
+      { id: "b", label: "Microcredit" },
       { id: "c", label: "Carbon trading" },
       { id: "d", label: "Crop insurance" },
     ],
@@ -185,12 +185,50 @@ export const POLLS = {
     topic: "Development Economics",
     question:
       "Amartya Sen helped create what index that measures development beyond GDP?",
+    correct: "d",
+    options: [
+      { id: "a", label: "Gini coefficient" },
+      { id: "b", label: "Consumer Price Index" },
+      { id: "c", label: "Dow Jones Index" },
+      { id: "d", label: "Human Development Index" },
+    ],
+  },
+
+  // ---- Artificial intelligence ----
+  ai1: {
+    topic: "Artificial Intelligence",
+    question:
+      "The term 'artificial intelligence' was coined at a now-famous 1956 summer workshop held at which university?",
+    correct: "b",
+    options: [
+      { id: "a", label: "MIT" },
+      { id: "b", label: "Dartmouth College" },
+      { id: "c", label: "Stanford" },
+      { id: "d", label: "Carnegie Mellon" },
+    ],
+  },
+  ai2: {
+    topic: "Artificial Intelligence",
+    question:
+      "In what year did IBM's Deep Blue defeat reigning world chess champion Garry Kasparov in a full match?",
+    correct: "c",
+    options: [
+      { id: "a", label: "1989" },
+      { id: "b", label: "2005" },
+      { id: "c", label: "1997" },
+      { id: "d", label: "2011" },
+    ],
+  },
+  ai3: {
+    topic: "Artificial Intelligence",
+    question:
+      "Today's leading AI systems — and the likely path ahead — are built on what neural-network architecture introduced in 2017?",
     correct: "a",
     options: [
-      { id: "a", label: "Human Development Index" },
-      { id: "b", label: "Gini coefficient" },
-      { id: "c", label: "Consumer Price Index" },
-      { id: "d", label: "Dow Jones Index" },
+      { id: "a", label: "The Transformer" },
+      { id: "b", label: "The perceptron" },
+      { id: "c", label: "Convolutional networks" },
+      { id: "d", label: "Decision trees" },
     ],
   },
 };
@@ -202,6 +240,7 @@ export const TOPICS = [
   { name: "UCSB Nobel Laureates", icon: "🏅", polls: ["uc1", "uc2", "uc3"] },
   { name: "Marine Biology", icon: "🐋", polls: ["mb1", "mb2", "mb3"] },
   { name: "Development Economics", icon: "📈", polls: ["de1", "de2", "de3"] },
+  { name: "Artificial Intelligence", icon: "🤖", polls: ["ai1", "ai2", "ai3"] },
 ];
 
 // Flat order of poll slides (also used by standalone tools).
