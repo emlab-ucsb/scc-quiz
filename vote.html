@@ -8,27 +8,15 @@
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
     body {
-      font-family: system-ui, sans-serif;
-      margin: 0;
-      min-height: 100vh;
-      background: #111;
-      color: #eee;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-      gap: 1.25rem;
+      font-family: system-ui, sans-serif; margin: 0; min-height: 100vh;
+      background: #111; color: #eee; display: flex; flex-direction: column;
+      padding: 1.5rem; gap: 1.25rem;
     }
     h1 { font-size: 1.6rem; line-height: 1.25; margin: 0.5rem 0 0; }
     .options { display: flex; flex-direction: column; gap: 1rem; }
     button.opt {
-      font-size: 1.3rem;
-      padding: 1.25rem;
-      border: 2px solid #444;
-      border-radius: 14px;
-      background: #1c1c1f;
-      color: #eee;
-      cursor: pointer;
-      transition: transform .05s ease, background .15s ease;
+      font-size: 1.3rem; padding: 1.25rem; border: 2px solid #444; border-radius: 14px;
+      background: #1c1c1f; color: #eee; cursor: pointer; transition: transform .05s ease;
     }
     button.opt:active { transform: scale(.98); }
     button.opt:disabled { opacity: .5; }
@@ -39,46 +27,100 @@
       margin-bottom: 1rem;
     }
     .status { font-size: 1.1rem; text-align: center; min-height: 1.5em; color: #9ad; }
-    .msg { text-align: center; color: #888; margin-top: 2rem; }
+
+    /* Identity gate */
+    #gate { position: fixed; inset: 0; background: #111; display: flex; flex-direction: column;
+      justify-content: center; gap: 1rem; padding: 2rem; }
+    #gate h2 { margin: 0; font-size: 1.5rem; }
+    #gate p { color: #999; margin: 0; }
+    .me { font-size: .95rem; color: #777; }
   </style>
 </head>
 <body>
+  <div id="gate">
+    <h2>Join the poll</h2>
+    <p>Pick a name for the leaderboard, or stay anonymous.</p>
+    <input id="nameInput" class="numinput" placeholder="Your name" maxlength="20" style="text-align:left" />
+    <button class="opt" id="joinNamed">Join</button>
+    <button class="opt" id="joinAnon" style="opacity:.8">Go anonymous</button>
+  </div>
+
   <h1 id="question">Loading…</h1>
   <div class="options" id="options"></div>
   <div class="status" id="status"></div>
+  <div class="me" id="me"></div>
 
   <script type="module">
-    import { ref, onValue, update, increment, push, set, onDisconnect } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    import { ref, onValue, set, push, onDisconnect } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
     import { db, getParams } from "./firebase-config.js";
     import { POLLS } from "./polls.js";
 
     const { room } = getParams();
+    const gate = document.getElementById("gate");
     const questionEl = document.getElementById("question");
     const optionsEl = document.getElementById("options");
     const statusEl = document.getElementById("status");
+    const meEl = document.getElementById("me");
 
-    // undefined (not null) so the first "waiting" update still renders.
     let currentPoll = undefined;
+    let player = getPlayer();
 
-    // Presence: count this device while it's connected, auto-remove on disconnect.
-    const presenceList = ref(db, `rooms/${room}/presence`);
-    onValue(ref(db, ".info/connected"), (snap) => {
-      if (snap.val() !== true) return;
-      const mine = push(presenceList);
-      onDisconnect(mine).remove();
-      set(mine, true);
-    });
+    if (player) startSession();
+    else showGate();
 
-    // Follow the presenter: whichever poll is live is what we render.
-    onValue(ref(db, `rooms/${room}/currentPoll`), (snap) => {
-      const poll = snap.val();
-      if (poll === currentPoll) return;
-      currentPoll = poll;
-      render();
-    }, (err) => {
-      questionEl.textContent = "DB error: " + err.message;
-      console.error(err);
-    });
+    function getPlayer() {
+      const id = localStorage.getItem("playerId");
+      const handle = localStorage.getItem("handle");
+      return id ? { id, handle } : null;
+    }
+
+    function showGate() {
+      gate.style.display = "flex";
+      document.getElementById("joinNamed").onclick = () => {
+        const name = document.getElementById("nameInput").value.trim();
+        join(name || randomHandle());
+      };
+      document.getElementById("joinAnon").onclick = () => join(randomHandle());
+    }
+
+    function join(handle) {
+      const id = "p_" + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem("playerId", id);
+      localStorage.setItem("handle", handle);
+      player = { id, handle };
+      gate.style.display = "none";
+      startSession();
+    }
+
+    function randomHandle() {
+      const adj = ["Swift", "Brave", "Sly", "Calm", "Bold", "Lucky", "Cosmic", "Quiet"];
+      const animal = ["Otter", "Falcon", "Fox", "Heron", "Lynx", "Moth", "Orca", "Wren"];
+      const pick = (a) => a[Math.floor(Math.random() * a.length)];
+      return `${pick(adj)}${pick(animal)}${Math.floor(Math.random() * 90 + 10)}`;
+    }
+
+    function startSession() {
+      meEl.textContent = `You: ${player.handle}`;
+
+      // Presence: count this device while connected.
+      const presenceList = ref(db, `rooms/${room}/presence`);
+      onValue(ref(db, ".info/connected"), (snap) => {
+        if (snap.val() !== true) return;
+        const mine = push(presenceList);
+        onDisconnect(mine).remove();
+        set(mine, true);
+      });
+
+      onValue(ref(db, `rooms/${room}/currentPoll`), (snap) => {
+        const poll = snap.val();
+        if (poll === currentPoll) return;
+        currentPoll = poll;
+        render();
+      }, (err) => {
+        questionEl.textContent = "DB error: " + err.message;
+        console.error(err);
+      });
+    }
 
     function render() {
       statusEl.textContent = "";
@@ -101,10 +143,10 @@
         btn.textContent = opt.label;
         if (already === opt.id) btn.classList.add("chosen");
         if (already) btn.disabled = true;
-        btn.addEventListener("click", () => castVote(opt));
+        btn.addEventListener("click", () => submit(opt.id));
         optionsEl.appendChild(btn);
       }
-      if (already) statusEl.textContent = "✓ Your vote is in";
+      if (already) statusEl.textContent = "✓ Your answer is in";
     }
 
     function renderNumber(poll, already) {
@@ -113,60 +155,44 @@
         return;
       }
       const input = document.createElement("input");
-      input.type = "number";
-      input.className = "numinput";
-      input.inputMode = "decimal";
+      input.type = "number"; input.className = "numinput"; input.inputMode = "decimal";
       if (poll.min != null) input.min = poll.min;
       if (poll.max != null) input.max = poll.max;
       if (poll.step != null) input.step = poll.step;
       input.placeholder = poll.placeholder || "Your number";
       const btn = document.createElement("button");
-      btn.className = "opt";
-      btn.textContent = "Submit";
-      btn.addEventListener("click", () => submitNumber(poll, input));
-      input.addEventListener("keydown", (e) => { if (e.key === "Enter") submitNumber(poll, input); });
+      btn.className = "opt"; btn.textContent = "Submit";
+      const go = () => {
+        const val = parseFloat(input.value);
+        if (!isFinite(val)) { statusEl.textContent = "Enter a number"; return; }
+        if (poll.min != null && val < poll.min) { statusEl.textContent = `Must be ≥ ${poll.min}`; return; }
+        if (poll.max != null && val > poll.max) { statusEl.textContent = `Must be ≤ ${poll.max}`; return; }
+        submit(val);
+      };
+      btn.addEventListener("click", go);
+      input.addEventListener("keydown", (e) => { if (e.key === "Enter") go(); });
       optionsEl.appendChild(input);
       optionsEl.appendChild(btn);
     }
 
-    async function submitNumber(poll, input) {
+    async function submit(answer) {
       const pollId = currentPoll;
-      const val = parseFloat(input.value);
-      if (!isFinite(val)) { statusEl.textContent = "Enter a number"; return; }
-      if (poll.min != null && val < poll.min) { statusEl.textContent = `Must be ≥ ${poll.min}`; return; }
-      if (poll.max != null && val > poll.max) { statusEl.textContent = `Must be ≤ ${poll.max}`; return; }
-      input.disabled = true;
+      [...optionsEl.querySelectorAll("button, input")].forEach((el) => (el.disabled = true));
       try {
-        await push(ref(db, `rooms/${room}/responses/${pollId}`), val);
-        localStorage.setItem(votedKey(pollId), String(val));
+        await set(ref(db, `rooms/${room}/answers/${pollId}/${player.id}`), {
+          h: player.handle,
+          a: answer,
+        });
+        localStorage.setItem(votedKey(pollId), String(answer));
         if (pollId === currentPoll) render();
       } catch (e) {
         statusEl.textContent = "Couldn't submit — try again";
-        input.disabled = false;
+        [...optionsEl.querySelectorAll("button, input")].forEach((el) => (el.disabled = false));
         console.error(e);
       }
     }
 
-    async function castVote(opt) {
-      const poll = currentPoll;
-      // disable all buttons immediately for instant feedback
-      [...optionsEl.children].forEach((b) => (b.disabled = true));
-      try {
-        await update(ref(db, `rooms/${room}/votes/${poll}`), {
-          [opt.id]: increment(1),
-        });
-        localStorage.setItem(votedKey(poll), opt.id);
-        if (poll === currentPoll) render();
-      } catch (e) {
-        statusEl.textContent = "Couldn't record vote — tap again";
-        [...optionsEl.children].forEach((b) => (b.disabled = false));
-        console.error(e);
-      }
-    }
-
-    function votedKey(poll) {
-      return `voted:${room}:${poll}`;
-    }
+    const votedKey = (poll) => `voted:${room}:${poll}`;
   </script>
 </body>
 </html>
