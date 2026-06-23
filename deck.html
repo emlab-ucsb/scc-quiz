@@ -119,9 +119,10 @@
     const ROOM = "TTT";
     const letter = (i) => String.fromCharCode(65 + i);
 
-    // ---- build topic + question slides before the podium ----
+    // ---- build question slides before the podium ----
     // Each question becomes two slides: an "ask" slide (options + live tally,
     // no breakdown) and a "results" slide (column graph, correct highlighted).
+    // Topics are interleaved round-robin so questions aren't grouped by topic.
     (function buildSlides() {
       const podium = document.querySelector("[data-podium]");
       const optList = (poll, mark) => poll.options.map((o, i) =>
@@ -130,38 +131,42 @@
         `<span class="check">${mark && poll.correct === o.id ? "✓" : ""}</span></li>`
       ).join("");
 
-      for (const t of TOPICS) {
-        const divider = document.createElement("section");
-        divider.className = "slide divider";
-        divider.innerHTML = `<div class="big-icon">${t.icon}</div><h1>${t.name}</h1>`;
-        podium.before(divider);
-
-        t.polls.forEach((id, n) => {
-          const poll = POLLS[id];
-          const head =
-            `<div class="qtopic">${t.icon} ${t.name} · ${n + 1} of ${t.polls.length}</div>` +
-            `<h2>${poll.question}</h2>`;
-
-          const ask = document.createElement("section");
-          ask.className = "slide";
-          ask.dataset.poll = id;
-          ask.dataset.mode = "ask";
-          ask.innerHTML = head +
-            `<ul>${optList(poll, false)}</ul>` +
-            `<div class="tally">⏳ 0 answers in</div>` +
-            `<div class="tally-hint">→ to reveal the answer</div>`;
-          podium.before(ask);
-
-          const results = document.createElement("section");
-          results.className = "slide";
-          results.dataset.poll = id;
-          results.dataset.mode = "results";
-          results.innerHTML = head +
-            `<div class="poll-grid"><ul>${optList(poll, true)}</ul>` +
-            `<div class="poll-chart"><div class="poll-empty">No answers yet…</div></div></div>`;
-          podium.before(results);
-        });
+      // Map each poll id to its topic, then interleave across topics.
+      const topicOf = {};
+      for (const t of TOPICS) for (const id of t.polls) topicOf[id] = t;
+      const lists = TOPICS.map((t) => t.polls.slice());
+      const order = [];
+      for (let more = true; more; ) {
+        more = false;
+        for (const l of lists) if (l.length) { order.push(l.shift()); more = true; }
       }
+
+      order.forEach((id, n) => {
+        const poll = POLLS[id];
+        const t = topicOf[id];
+        const head =
+          `<div class="qtopic">Question ${n + 1} / ${order.length} · ${t.icon} ${t.name}</div>` +
+          `<h2>${poll.question}</h2>`;
+
+        const ask = document.createElement("section");
+        ask.className = "slide";
+        ask.dataset.poll = id;
+        ask.dataset.mode = "ask";
+        ask.innerHTML = head +
+          `<ul>${optList(poll, false)}</ul>` +
+          `<div class="tally">⏳ 0 answers in</div>` +
+          `<div class="tally-hint">→ to reveal the answer</div>`;
+        podium.before(ask);
+
+        const results = document.createElement("section");
+        results.className = "slide";
+        results.dataset.poll = id;
+        results.dataset.mode = "results";
+        results.innerHTML = head +
+          `<div class="poll-grid"><ul>${optList(poll, true)}</ul>` +
+          `<div class="poll-chart"><div class="poll-empty">No answers yet…</div></div></div>`;
+        podium.before(results);
+      });
     })();
 
     const slides = [...document.querySelectorAll(".slide")];
