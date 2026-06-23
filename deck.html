@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Trivia Night</title>
   <style>
-    :root { color-scheme: dark; }
+    :root { color-scheme: light; }
     * { box-sizing: border-box; }
     html, body { margin: 0; height: 100%; }
     body {
-      font-family: system-ui, sans-serif; background: #0d0d10; color: #eee;
+      font-family: system-ui, sans-serif; background: #fbfaf7; color: #1b1b1f;
       overflow: hidden;
     }
     .slide {
@@ -22,70 +22,66 @@
     p, li { font-size: 1.6rem; line-height: 1.5; }
     ul { margin: 0; padding-left: 0; list-style: none; }
     ul li { margin: .5rem 0; }
-    .muted { color: #8a8f98; font-size: 1.1rem; }
-    .accent { color: #43a047; }
+    .muted { color: #6b7280; font-size: 1.1rem; }
+    .accent { color: #1b7f33; }
 
-    /* Topic label on a question slide */
-    .qtopic { font-size: 1.3rem; font-weight: 700; color: #9ad; letter-spacing: .04em; }
+    /* Question slides get a per-question backdrop (set via --bg); others blank. */
+    .qslide::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: var(--bg) center/contain no-repeat;
+      opacity: .22;
+    }
+    .qslide > * { position: relative; z-index: 1; }
 
-    /* Topic divider slide */
+    /* Question label */
+    .qtopic { font-size: 1.3rem; font-weight: 700; color: #1d4ed8; letter-spacing: .04em; }
+
+    /* Centered intro / how-to slide */
     .divider { align-items: center; justify-content: center; text-align: center; }
     .divider .big-icon { font-size: 7rem; line-height: 1; }
     .divider h1 { font-size: 4rem; }
 
-    /* Two-column question body: options left, image (+ chart) right */
-    .qbody { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-    .qleft { min-width: 0; }
-    .media { min-width: 0; display: flex; flex-direction: column; gap: 1rem; }
+    /* Two-column results layout: options left, chart right */
+    .poll-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
     .opt-line { display: flex; align-items: baseline; gap: .6rem; }
-    .opt-line .key { color: #9ad; font-weight: 700; min-width: 1.4em; }
-    .opt-line.correct { color: #b9f6ca; }
-    .opt-line.correct .key { color: #69f0ae; }
-    .opt-line .check { color: #69f0ae; font-weight: 700; }
+    .opt-line .key { color: #1d4ed8; font-weight: 700; min-width: 1.4em; }
+    .opt-line.correct { color: #1b7f33; font-weight: 600; }
+    .opt-line.correct .key { color: #1b7f33; }
+    .opt-line .check { color: #1b7f33; font-weight: 700; }
 
-    /* Image box — scales any picture to fit without stretching */
-    .imgbox { height: 32vh; display: flex; align-items: center; justify-content: center;
-      background: #15151a; border: 1px solid #2a2a30; border-radius: 14px; padding: .6rem;
-      overflow: hidden; }
-    .imgbox img { max-width: 100%; max-height: 100%; width: auto; height: auto;
-      object-fit: contain; border-radius: 8px; display: block; }
-    .imgbox.missing { color: #c66; font-size: 1rem; text-align: center; }
-    .imgbox.missing::after { content: "⚠ " attr(data-path) " not found"; }
-    .imgbox.sm { height: 24vh; width: min(46vw, 60vh); margin: 0 auto; }
-
-    .chart-cols { display: flex; align-items: stretch; gap: .8rem; height: 30vh; }
+    .chart-cols { display: flex; align-items: stretch; gap: .8rem; height: 44vh; }
     .bar-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
-    .bar-count { font-size: 1.1rem; color: #cfd8dc; white-space: nowrap; }
+    .bar-count { font-size: 1.1rem; color: #555; white-space: nowrap; }
     .bar-track { flex: 1; width: 70%; display: flex; align-items: flex-end; }
     .bar-fill { width: 100%; height: 0; border-radius: 8px 8px 0 0;
       background: linear-gradient(180deg, #4caf50, #2e7d32); transition: height .4s ease; }
-    .bar-fill.correct { background: linear-gradient(180deg, #ffd54f, #c9a227); }
+    .bar-fill.correct { background: linear-gradient(180deg, #ffca28, #c9a227); }
     .bar-label { font-size: 1.3rem; font-weight: 700; }
-    .bar-label.correct { color: #ffd54f; }
-    .poll-empty { color: #777; font-size: 1.3rem; }
+    .bar-label.correct { color: #b8860b; }
+    .poll-empty { color: #999; font-size: 1.3rem; }
 
     /* Live answer tally on the ask slide */
-    .tally { font-size: 2.2rem; font-weight: 800; color: #43a047; margin-top: 1rem; }
-    .tally-hint { color: #555; font-size: 1rem; }
+    .tally { font-size: 2.2rem; font-weight: 800; color: #1b7f33; margin-top: 1rem; }
+    .tally-hint { color: #9aa0a6; font-size: 1rem; }
 
     /* Join slide */
     .join-box { display: flex; gap: 3rem; align-items: center; }
-    .qr { background: #fff; padding: 16px; border-radius: 16px; }
-    .join-count { font-size: 2.6rem; font-weight: 800; color: #43a047; }
-    .join-url { color: #9ad; font-size: 1.2rem; word-break: break-all; }
+    .qr { background: #fff; padding: 16px; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,.12); }
+    .join-count { font-size: 2.6rem; font-weight: 800; color: #1b7f33; }
+    .join-url { color: #1d4ed8; font-size: 1.2rem; word-break: break-all; }
 
     /* Podium */
     .podium { display: flex; gap: 2rem; align-items: flex-end; justify-content: center; height: 50vh; }
     .stand { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: .6rem; width: 18vw; }
     .stand .name { font-size: 1.6rem; font-weight: 700; }
-    .stand .score { color: #9ad; font-size: 1.2rem; }
+    .stand .score { color: #1d4ed8; font-size: 1.2rem; }
     .stand .block { width: 100%; border-radius: 12px 12px 0 0; display: flex; align-items: flex-start;
       justify-content: center; font-size: 3rem; padding-top: .5rem; }
     .gold .block   { background: linear-gradient(180deg,#ffd54f,#c9a227); height: 100%; }
     .silver .block { background: linear-gradient(180deg,#cfd8dc,#90a4ae); height: 75%; }
     .bronze .block { background: linear-gradient(180deg,#d7a06a,#a86a3d); height: 55%; }
 
-    .pagenum { position: fixed; bottom: 1rem; right: 1.2rem; color: #555; font-size: .9rem; }
+    .pagenum { position: fixed; bottom: 1rem; right: 1.2rem; color: #aaa; font-size: .9rem; }
   </style>
 </head>
 <body>
@@ -101,8 +97,6 @@
         <p class="muted">Scan to join — questions follow the slides.</p>
       </div>
     </div>
-    <!-- Edit src to change this slide's image -->
-    <div class="imgbox sm"><img src="pics/at7adf.jpg" alt="" onerror="this.style.display='none';this.parentNode.classList.add('missing');this.parentNode.dataset.path=this.getAttribute('src')"></div>
   </section>
 
   <!-- How to play -->
@@ -111,19 +105,15 @@
     <h1>How to play</h1>
     <p>Pick a name or go anonymous. Answer on your phone before we reveal.</p>
     <p class="accent">+1 point for every correct answer. Most points wins.</p>
-    <!-- Edit src to change this slide's image -->
-    <div class="imgbox sm"><img src="pics/at7adf.jpg" alt="" onerror="this.style.display='none';this.parentNode.classList.add('missing');this.parentNode.dataset.path=this.getAttribute('src')"></div>
   </section>
 
-  <!-- Topic dividers + question slides are generated here -->
+  <!-- Question slides are generated here -->
 
   <!-- Podium -->
   <section class="slide" data-podium>
     <h2>🏆 Final leaderboard</h2>
     <div class="podium"><div class="poll-empty">Tallying…</div></div>
     <p class="muted">One point per correct answer across all 18 questions.</p>
-    <!-- Edit src to change this slide's image -->
-    <div class="imgbox sm"><img src="pics/at7adf.jpg" alt="" onerror="this.style.display='none';this.parentNode.classList.add('missing');this.parentNode.dataset.path=this.getAttribute('src')"></div>
   </section>
 
   <div class="pagenum"></div>
@@ -134,15 +124,11 @@
     import { db } from "./firebase-config.js";
     import { POLLS, POLL_ORDER, scoreAnswer } from "./polls.js";
 
-    const ROOM = "TTT";
-    const PLACEHOLDER = "pics/at7adf.jpg"; // shown when a question has no image
+    // Room comes from the URL (?room=foo) so each test can use a fresh room;
+    // defaults to TTT for the real event. The QR below points phones at it.
+    const ROOM = new URLSearchParams(location.search).get("room") || "TTT";
+    const PLACEHOLDER_BG = "pics/Candy-Cane-Pistol-Shrimp.png.webp";
     const letter = (i) => String.fromCharCode(65 + i);
-
-    // Framed image that scales to fit (no stretch) and flags a missing file.
-    const imgBox = (src, extra = "") =>
-      `<div class="imgbox${extra ? " " + extra : ""}"><img src="${src}" alt="" ` +
-      `onerror="this.style.display='none';this.parentNode.classList.add('missing');` +
-      `this.parentNode.dataset.path=this.getAttribute('src')"></div>`;
 
     // ---- build question slides before the podium ----
     // Each question becomes two slides: an "ask" slide (options + live tally,
@@ -157,30 +143,30 @@
 
       POLL_ORDER.forEach((id, n) => {
         const poll = POLLS[id];
-        const img = poll.image || PLACEHOLDER;
+        const bg = `url("${poll.background || PLACEHOLDER_BG}")`;
         const head =
           `<div class="qtopic">Question ${n + 1} / ${POLL_ORDER.length}</div>` +
           `<h2>${poll.question}</h2>`;
 
         const ask = document.createElement("section");
-        ask.className = "slide";
+        ask.className = "slide qslide";
         ask.dataset.poll = id;
         ask.dataset.mode = "ask";
+        ask.style.setProperty("--bg", bg);
         ask.innerHTML = head +
-          `<div class="qbody"><div class="qleft"><ul>${optList(poll, false)}</ul>` +
+          `<ul>${optList(poll, false)}</ul>` +
           `<div class="tally">⏳ 0 answers in</div>` +
-          `<div class="tally-hint">→ to reveal the answer</div></div>` +
-          `<div class="media">${imgBox(img)}</div></div>`;
+          `<div class="tally-hint">→ to reveal the answer</div>`;
         podium.before(ask);
 
         const results = document.createElement("section");
-        results.className = "slide";
+        results.className = "slide qslide";
         results.dataset.poll = id;
         results.dataset.mode = "results";
+        results.style.setProperty("--bg", bg);
         results.innerHTML = head +
-          `<div class="qbody"><div class="qleft"><ul>${optList(poll, true)}</ul></div>` +
-          `<div class="media">${imgBox(img)}` +
-          `<div class="poll-chart"><div class="poll-empty">No answers yet…</div></div></div></div>`;
+          `<div class="poll-grid"><ul>${optList(poll, true)}</ul>` +
+          `<div class="poll-chart"><div class="poll-empty">No answers yet…</div></div></div>`;
         podium.before(results);
       });
     })();
