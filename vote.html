@@ -62,6 +62,24 @@
     const statusEl = document.getElementById("status");
     const meEl = document.getElementById("me");
 
+    // Safari Private Browsing / "Block All Cookies" makes localStorage throw on
+    // write, which previously froze the join screen. Fall back to in-memory.
+    const store = (() => {
+      try {
+        const k = "__probe";
+        localStorage.setItem(k, "1");
+        localStorage.removeItem(k);
+        return localStorage;
+      } catch {
+        const mem = new Map();
+        return {
+          getItem: (k) => (mem.has(k) ? mem.get(k) : null),
+          setItem: (k, v) => mem.set(k, String(v)),
+          removeItem: (k) => mem.delete(k),
+        };
+      }
+    })();
+
     let currentPoll = undefined;
     let player = getPlayer();
 
@@ -69,8 +87,8 @@
     else showGate();
 
     function getPlayer() {
-      const id = localStorage.getItem("playerId");
-      const handle = localStorage.getItem("handle");
+      const id = store.getItem("playerId");
+      const handle = store.getItem("handle");
       return id ? { id, handle } : null;
     }
 
@@ -85,8 +103,8 @@
 
     function join(handle) {
       const id = "p_" + Math.random().toString(36).slice(2, 10);
-      localStorage.setItem("playerId", id);
-      localStorage.setItem("handle", handle);
+      store.setItem("playerId", id);
+      store.setItem("handle", handle);
       player = { id, handle };
       gate.style.display = "none";
       startSession();
@@ -136,7 +154,7 @@
         return;
       }
       questionEl.textContent = poll.question;
-      const already = localStorage.getItem(votedKey(currentPoll));
+      const already = store.getItem(votedKey(currentPoll));
       if (poll.type === "number") renderNumber(poll, already);
       else renderChoice(poll, already);
     }
@@ -188,7 +206,7 @@
           h: player.handle,
           a: answer,
         });
-        localStorage.setItem(votedKey(pollId), String(answer));
+        store.setItem(votedKey(pollId), String(answer));
         if (pollId === currentPoll) render();
       } catch (e) {
         statusEl.textContent = "Couldn't submit — try again";
