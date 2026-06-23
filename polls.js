@@ -79,14 +79,14 @@ export const POLLS = {
   },
   q6: {
     question:
-      "Storke Tower, the tallest structure in Santa Barbara County, rises over the UCSB campus. It honors Thomas Storke, a local newspaperman who in 1962 won what?",
+      "What now-ubiquitous business was founded in a tiny Isla Vista storefront in 1970, named after its founder's curly red hair?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
-    correct: "a",
+    correct: "c",
     options: [
-      { id: "a", label: "A Pulitzer Prize" },
-      { id: "b", label: "A Nobel Prize" },
-      { id: "c", label: "An Olympic gold medal" },
-      { id: "d", label: "An Academy Award" },
+      { id: "a", label: "Patagonia", note: "Ventura, 1973" },
+      { id: "b", label: "Motel 6", note: "Santa Barbara, 1962" },
+      { id: "c", label: "Kinko's", note: "Isla Vista, 1970" },
+      { id: "d", label: "The Habit Burger Grill", note: "Santa Barbara, 1969" },
     ],
   },
   q7: {
@@ -107,7 +107,7 @@ export const POLLS = {
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
     correct: "c",
     options: [
-      { id: "a", label: "King of the Missions" },
+      { id: "a", label: "Castle by the Sea" },
       { id: "b", label: "Jewel of the Coast" },
       { id: "c", label: "Queen of the Missions" },
       { id: "d", label: "Crown of California" },
@@ -129,10 +129,10 @@ export const POLLS = {
     question:
       "During his presidency, Ronald Reagan's mountaintop ranch above Santa Barbara was dubbed the 'Western White House.' What was it named?",
     background: "pics/Candy-Cane-Pistol-Shrimp.png.webp",
-    correct: "a",
+    correct: "b",
     options: [
-      { id: "a", label: "Rancho del Cielo" },
-      { id: "b", label: "Rancho Mirage" },
+      { id: "a", label: "Rancho Mirage" },
+      { id: "b", label: "Rancho del Cielo" },
       { id: "c", label: "Casa del Sol" },
       { id: "d", label: "El Rancho Grande" },
     ],
