@@ -6,12 +6,17 @@
 // the deck and phones follow this file's order automatically. Reload the page
 // (or push to redeploy) to see your changes.
 //
+// `image` is the picture shown on that question's slides. Drop a file into the
+// pics/ folder and set image to its path, e.g. image: "pics/kelp.jpg". The
+// deck scales it to fit without stretching; leave the placeholder to show that.
+//
 // Answers are stored per player at /rooms/{room}/answers/{poll}/{playerId}.
 // Scoring is dead simple: +1 for each correct answer, 0 otherwise.
 export const POLLS = {
   q1: {
     question:
       "The 1969 Santa Barbara oil spill helped inspire what annual event, first held in 1970?",
+    image: "pics/at7adf.jpg",
     correct: "b",
     options: [
       { id: "a", label: "Arbor Day" },
@@ -23,6 +28,7 @@ export const POLLS = {
   q2: {
     question:
       "Who first calculated, in 1896, that CO₂ from burning coal could warm the planet?",
+    image: "pics/at7adf.jpg",
     correct: "a",
     options: [
       { id: "a", label: "Svante Arrhenius" },
@@ -34,6 +40,7 @@ export const POLLS = {
   q3: {
     question:
       "UCSB's Shuji Nakamura shared the 2014 Nobel Prize in Physics for inventing what?",
+    image: "pics/at7adf.jpg",
     correct: "d",
     options: [
       { id: "a", label: "The transistor" },
@@ -45,6 +52,7 @@ export const POLLS = {
   q4: {
     question:
       "Giant kelp, the backbone of Santa Barbara's underwater forests, can grow as fast as how much per day?",
+    image: "pics/at7adf.jpg",
     correct: "b",
     options: [
       { id: "a", label: "About 2 inches" },
@@ -56,6 +64,7 @@ export const POLLS = {
   q5: {
     question:
       "Who shared the 2019 Nobel Prize in Economics with Esther Duflo and Michael Kremer for an experimental approach to fighting global poverty?",
+    image: "pics/at7adf.jpg",
     correct: "c",
     options: [
       { id: "a", label: "Amartya Sen" },
@@ -67,6 +76,7 @@ export const POLLS = {
   q6: {
     question:
       "The term 'artificial intelligence' was coined at a now-famous 1956 summer workshop held at which university?",
+    image: "pics/at7adf.jpg",
     correct: "b",
     options: [
       { id: "a", label: "MIT" },
@@ -78,6 +88,7 @@ export const POLLS = {
   q7: {
     question:
       "Founded in 1786, Old Mission Santa Barbara is known by what nickname?",
+    image: "pics/at7adf.jpg",
     correct: "c",
     options: [
       { id: "a", label: "King of the Missions" },
@@ -89,6 +100,7 @@ export const POLLS = {
   q8: {
     question:
       "The famous 'Keeling Curve,' measured at Mauna Loa since 1958, tracks the rising concentration of what gas?",
+    image: "pics/at7adf.jpg",
     correct: "c",
     options: [
       { id: "a", label: "Methane" },
@@ -100,6 +112,7 @@ export const POLLS = {
   q9: {
     question:
       "Alan Heeger shared the 2000 Nobel Prize in Chemistry for the discovery of conductive what?",
+    image: "pics/at7adf.jpg",
     correct: "a",
     options: [
       { id: "a", label: "Polymers (plastics)" },
@@ -111,6 +124,7 @@ export const POLLS = {
   q10: {
     question:
       "Sea otters are a keystone species because they keep what kelp-grazing animal in check?",
+    image: "pics/at7adf.jpg",
     correct: "d",
     options: [
       { id: "a", label: "Jellyfish" },
@@ -122,6 +136,7 @@ export const POLLS = {
   q11: {
     question:
       "Muhammad Yunus and the Grameen Bank won the 2006 Nobel Peace Prize for pioneering what?",
+    image: "pics/at7adf.jpg",
     correct: "b",
     options: [
       { id: "a", label: "Foreign aid" },
@@ -133,6 +148,7 @@ export const POLLS = {
   q12: {
     question:
       "In what year did IBM's Deep Blue defeat reigning world chess champion Garry Kasparov in a full match?",
+    image: "pics/at7adf.jpg",
     correct: "c",
     options: [
       { id: "a", label: "1989" },
@@ -144,6 +160,7 @@ export const POLLS = {
   q13: {
     question:
       "A 1925 earthquake leveled much of downtown Santa Barbara, prompting a rebuild in what signature architectural style?",
+    image: "pics/at7adf.jpg",
     correct: "d",
     options: [
       { id: "a", label: "Art Deco" },
@@ -155,6 +172,7 @@ export const POLLS = {
   q14: {
     question:
       "2024 became the first full calendar year in which global average temperature exceeded what level of warming above pre-industrial?",
+    image: "pics/at7adf.jpg",
     correct: "b",
     options: [
       { id: "a", label: "1.0 °C" },
@@ -166,6 +184,7 @@ export const POLLS = {
   q15: {
     question:
       "Roughly how many Nobel Prizes have UCSB faculty won since 1998, making it one of the era's most decorated public universities?",
+    image: "pics/at7adf.jpg",
     correct: "c",
     options: [
       { id: "a", label: "One" },
@@ -177,6 +196,7 @@ export const POLLS = {
   q16: {
     question:
       "Coral bleaching happens when heat-stressed corals expel what symbiotic organism?",
+    image: "pics/at7adf.jpg",
     correct: "a",
     options: [
       { id: "a", label: "Zooxanthellae (algae)" },
@@ -188,6 +208,7 @@ export const POLLS = {
   q17: {
     question:
       "Amartya Sen helped create what index that measures development beyond GDP?",
+    image: "pics/at7adf.jpg",
     correct: "d",
     options: [
       { id: "a", label: "Gini coefficient" },
@@ -199,6 +220,7 @@ export const POLLS = {
   q18: {
     question:
       "Today's leading AI systems — and the likely path ahead — are built on what neural-network architecture introduced in 2017?",
+    image: "pics/at7adf.jpg",
     correct: "a",
     options: [
       { id: "a", label: "The Transformer" },
